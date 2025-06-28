@@ -19,7 +19,7 @@ export default function UnlockedPage() {
   return (
     <main className="min-h-screen flex items-center justify-center bg-stone-50 px-4">
       <div className="text-center max-w-md bg-white p-8 rounded-xl shadow-md border">
-        <h1 className="text-2xl font-bold text-stone-800 mb-2">You're all set!</h1>
+        <h1 className="text-2xl font-bold text-stone-800 mb-2">You&apos;re all set!</h1>
         <p className="text-stone-600">
           Thank you for supporting CoverSnap. Unlimited access is now unlocked.
         </p>
