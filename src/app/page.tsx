@@ -87,6 +87,7 @@ export default function Home() {
     <>
       <Head>
         <title>CoverSnap – AI-Powered Cover Letters</title>
+        <link rel="icon" href="/favicon.ico" />
         <meta name="description" content="Generate personalized, professional cover letters in seconds with AI. Paste the job description and get started instantly." />
       </Head>
 
