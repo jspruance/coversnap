@@ -88,32 +88,16 @@ export default function Home() {
       <Head>
         <title>CoverSnap – AI-Powered Cover Letters</title>
         <meta name="description" content="Generate personalized, professional cover letters in seconds with AI. Paste the job description and get started instantly." />
-        <meta property="og:title" content="CoverSnap – AI Cover Letter Generator" />
-        <meta property="og:description" content="Generate personalized, professional cover letters in seconds with AI. Paste the job description and get started instantly." />
-        <meta property="og:image" content="/og-image.png" />
-        <meta property="og:type" content="website" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="CoverSnap – AI Cover Letter Generator" />
-        <meta name="twitter:description" content="Generate personalized, professional cover letters in seconds with AI." />
-        <meta name="twitter:image" content="/og-image.png" />
-        <link rel="icon" href="/favicon.ico" />
-        <meta name="robots" content="index, follow" />
-        <script type="application/ld+json">{`
-          {
-            "@context": "https://schema.org",
-            "@type": "WebApplication",
-            "name": "CoverSnap",
-            "url": "https://coversnapapp.com",
-            "description": "Generate personalized, professional cover letters in seconds with AI.",
-            "applicationCategory": "BusinessApplication",
-            "operatingSystem": "All"
-          }
-        `}</script>
-        <script async defer data-domain="coversnapapp.com" src="https://plausible.io/js/plausible.js"></script>
       </Head>
 
       <main className="min-h-screen bg-gradient-to-b from-white via-stone-50 to-stone-100 px-0 relative overflow-hidden">
-        {/* Restored App content */}
+        <header className="sticky top-0 z-20 backdrop-blur bg-transparent w-full flex justify-between items-center py-4 px-4 max-w-6xl mx-auto">
+          <Image src="/logos/coversnap-logo-44h.png" alt="CoverSnap Logo" width={199} height={44} />
+          <nav className="text-stone-500 text-sm">
+            <a href="#contact" className="hover:text-stone-700 cursor-pointer">Contact</a>
+          </nav>
+        </header>
+
         <section className="flex flex-col items-center justify-center text-center py-12 px-4 z-10 relative">
           <div ref={formRef} className="w-full max-w-6xl bg-white shadow-xl border rounded-xl p-10 space-y-10">
             <div className="text-center">
@@ -165,6 +149,59 @@ export default function Home() {
           </div>
         </section>
 
+        <section className="w-full bg-white text-center py-28 px-0">
+          <h3 className="text-2xl font-semibold text-stone-700 mb-12">CoverSnap has helped candidates get jobs at:</h3>
+          <div className="flex justify-center items-center gap-10 flex-wrap opacity-70 max-w-6xl mx-auto">
+            <img src="/logos/google.png" alt="Google" className="h-10 grayscale" />
+            <img src="/logos/microsoft.png" alt="Microsoft" className="h-10 grayscale" />
+            <img src="/logos/apple.png" alt="Apple" className="h-10 grayscale" />
+            <img src="/logos/nvidia.png" alt="Nvidia" className="h-10 grayscale" />
+            <img src="/logos/amazon.png" alt="Amazon" className="h-10 grayscale" />
+            <img src="/logos/adobe.png" alt="Adobe" className="h-10 grayscale" />
+          </div>
+        </section>
+
+        <section className="text-center py-12">
+          <div className="flex justify-center gap-6 mb-12">
+            <a
+              href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(
+                "Just generated a killer AI cover letter in seconds with CoverSnap! Try it free:"
+              )}&url=https://coversnapapp.com`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center px-4 py-2 border border-stone-300 rounded-md text-sm text-stone-700 hover:bg-stone-100"
+            >
+              <Twitter className="w-4 h-4 mr-2" /> Share on Twitter
+            </a>
+            <a
+              href="https://www.linkedin.com/sharing/share-offsite/?url=https://coversnapapp.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center px-4 py-2 border border-stone-300 rounded-md text-sm text-stone-700 hover:bg-stone-100"
+            >
+              <Linkedin className="w-4 h-4 mr-2" /> Share on LinkedIn
+            </a>
+          </div>
+
+          <blockquote className="italic text-stone-600 text-lg max-w-xl mx-auto">
+            “CoverSnap streamlined my entire application process — I had tailored letters out in minutes.”
+            <br />
+            <span className="not-italic text-sm text-stone-500">— Bob Jenkins, Phoenix, AZ</span>
+          </blockquote>
+        </section>
+
+        <section id="contact" className="text-center mt-16 px-4">
+          <h3 className="text-lg font-semibold text-stone-700 mb-4">Contact Us</h3>
+          <form action="https://formspree.io/f/myzjlvwz" method="POST" className="max-w-md mx-auto space-y-4">
+            <input type="hidden" name="_subject" value="New Contact Submission from CoverSnap" />
+            <input type="text" name="_gotcha" className="hidden" />
+
+            <input type="email" name="email" required placeholder="Your email" className="w-full border border-stone-300 rounded-md p-2" />
+            <textarea name="message" required placeholder="Your message" className="w-full border border-stone-300 rounded-md p-2 h-32" />
+            <Button type="submit" className="bg-stone-900 text-white hover:bg-black px-6 py-2 rounded-md">Send</Button>
+          </form>
+        </section>
+
         {showPaywall && (
           <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40">
             <div className="bg-white rounded-lg p-6 shadow-lg max-w-sm w-full text-center">
@@ -191,6 +228,10 @@ export default function Home() {
             </div>
           </div>
         )}
+
+        <footer className="text-center text-base text-stone-400 py-12 z-10 relative">
+          Built with GPT-4o · CoverSnap 2025
+        </footer>
       </main>
     </>
   )
