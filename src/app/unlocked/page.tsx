@@ -25,6 +25,7 @@ export default function UnlockedPage() {
         </p>
         <p className="text-sm text-stone-500 mt-6">Redirecting you back to the app...</p>
       </div>
+
     </main>
   )
 }

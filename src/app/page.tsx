@@ -59,7 +59,7 @@ export default function Home() {
     // Check usage limit
     const uses = parseInt(localStorage.getItem("coversnap_uses") || "0")
     if (!unlocked && uses >= 3) {
-      alert("You’ve used all 3 free letters today. Unlock unlimited access for $5.")
+      alert("You've used all 3 free letters today. Unlock unlimited access for $5.")
       window.location.href = "https://buy.stripe.com/3cIeVd5QIeOt1M5emQebu03"
       return
     }
