@@ -31,6 +31,16 @@ export default function Home() {
     localStorage.setItem("coversnap_output", output)
   }, [inputValue, output])
 
+  // Initialize usage count
+  useEffect(() => {
+    const today = new Date().toDateString()
+    const storedDate = localStorage.getItem("coversnap_date")
+    if (storedDate !== today) {
+      localStorage.setItem("coversnap_date", today)
+      localStorage.setItem("coversnap_uses", "0")
+    }
+  }, [])
+
   useEffect(() => {
     let timer: NodeJS.Timeout
     if (cooldown > 0) {
@@ -42,6 +52,17 @@ export default function Home() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement> | React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault()
     if (cooldown > 0 || loading || inputValue.trim().length < 30) return
+
+    // Check unlock status
+    const unlocked = localStorage.getItem("coversnap_unlocked") === "true"
+
+    // Check usage limit
+    const uses = parseInt(localStorage.getItem("coversnap_uses") || "0")
+    if (!unlocked && uses >= 3) {
+      alert("You’ve used all 3 free letters today. Unlock unlimited access for $5.")
+      window.location.href = "https://buy.stripe.com/9B6bJ11AsgWB9exfqUebu02"
+      return
+    }
 
     setLoading(true)
     setOutput("")
@@ -56,7 +77,12 @@ export default function Home() {
     setOutput(data.result || "Something went wrong.")
     setLoading(false)
     setCooldown(15)
+
+    if (!unlocked) {
+      localStorage.setItem("coversnap_uses", (uses + 1).toString())
+    }
   }
+
 
   const handleCopy = () => {
     navigator.clipboard.writeText(output)
@@ -90,6 +116,7 @@ export default function Home() {
             "operatingSystem": "All"
           }
         `}</script>
+        <script async defer data-domain="coversnapapp.com" src="https://plausible.io/js/plausible.js"></script>
       </Head>
 
       <main className="min-h-screen bg-gradient-to-b from-white via-stone-50 to-stone-100 px-0 relative overflow-hidden">
@@ -165,15 +192,48 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="text-center py-10">
-          <blockquote className="italic text-stone-600 text-lg max-w-xl mx-auto">“This helped me land an interview in 5 minutes.” – A happy user</blockquote>
+        <section className="text-center py-12">
+          <div className="flex justify-center gap-6 mb-12">
+            <a
+              href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(
+                "Just generated a killer AI cover letter in seconds with CoverSnap! Try it free:"
+              )}&url=https://coversnapapp.com`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center px-4 py-2 border border-stone-300 rounded-md text-sm text-stone-700 hover:bg-stone-100"
+            >
+              <Twitter className="w-4 h-4 mr-2" /> Share on Twitter
+            </a>
+            <a
+              href="https://www.linkedin.com/sharing/share-offsite/?url=https://coversnapapp.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center px-4 py-2 border border-stone-300 rounded-md text-sm text-stone-700 hover:bg-stone-100"
+            >
+              <Linkedin className="w-4 h-4 mr-2" /> Share on LinkedIn
+            </a>
+          </div>
+
+          <blockquote className="italic text-stone-600 text-lg max-w-xl mx-auto">
+            “CoverSnap streamlined my entire application process — I had tailored letters out in minutes.”
+            <br />
+            <span className="not-italic text-sm text-stone-500">— Bob Jenkins, Phoenix, AZ</span>
+          </blockquote>
         </section>
 
-        <section id="contact" className="text-center mt-16">
-          <h3 className="text-lg font-semibold text-stone-700">Business Inquiries?</h3>
-          <p className="text-sm text-stone-500 mt-2">Use the form at <a href="https://forms.gle/xyz" target="_blank" rel="noopener noreferrer" className="text-stone-600 underline">this link</a> to get in touch. We’ll get back to you promptly.</p>
-        </section>
 
+        <section id="contact" className="text-center mt-16 px-4">
+          <h3 className="text-lg font-semibold text-stone-700 mb-4">Contact Us</h3>
+          <form action="https://formspree.io/f/myzjlvwz" method="POST" className="max-w-md mx-auto space-y-4">
+            <input type="hidden" name="_subject" value="New Contact Submission from CoverSnap" />
+            <input type="text" name="_gotcha" className="hidden" />
+            
+            <input type="email" name="email" required placeholder="Your email" className="w-full border border-stone-300 rounded-md p-2" />
+            <textarea name="message" required placeholder="Your message" className="w-full border border-stone-300 rounded-md p-2 h-32" />
+            <Button type="submit" className="bg-stone-900 text-white hover:bg-black px-6 py-2 rounded-md">Send</Button>
+          </form>
+        </section>
+        
         <footer className="text-center text-base text-stone-400 py-12 z-10 relative">Built with GPT-4o · CoverSnap 2025</footer>
       </main>
     </>
