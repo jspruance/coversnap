@@ -214,13 +214,13 @@ export default function Home() {
               <div className="flex justify-center gap-4">
                 <button
                   onClick={() => window.location.href = "https://buy.stripe.com/3cIeVd5QIeOt1M5emQebu03"}
-                  className="bg-stone-900 text-white px-4 py-2 rounded hover:bg-black"
+                  className="bg-stone-900 text-white px-4 py-2 rounded hover:bg-black cursor-pointer"
                 >
                   Unlock Now
                 </button>
                 <button
                   onClick={() => setShowPaywall(false)}
-                  className="text-stone-500 px-4 py-2 hover:underline"
+                  className="text-stone-500 px-4 py-2 hover:underline cursor-pointer"
                 >
                   Maybe later
                 </button>
@@ -230,7 +230,7 @@ export default function Home() {
         )}
 
         <footer className="text-center text-base text-stone-400 py-12 z-10 relative">
-          Built with GPT-4o · CoverSnap 2025
+          &copy; CoverSnap 2025
         </footer>
       </main>
     </>
