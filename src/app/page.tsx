@@ -136,7 +136,7 @@ export default function Home() {
                     <label htmlFor="style" className="text-stone-700 font-medium text-lg">Cover Letter:</label>
                     <select
                       id="style"
-                      className="border border-stone-300 rounded px-2 py-1 cursor-pointer bg-white text-stone-700"
+                      className="border border-stone-300 rounded px-2 py-0 cursor-pointer bg-white text-stone-700"
                       value={lengthOption}
                       onChange={(e) => setLengthOption(e.target.value)}
                       title={styleDescriptions[lengthOption]}
