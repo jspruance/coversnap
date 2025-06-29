@@ -84,9 +84,9 @@ export default function Home() {
   }
 
   const styleDescriptions: { [key: string]: string } = {
-    short: "Quick and punchy — 3–4 tight paragraphs.",
+    short: "Quick and punchy — 3–4 tight sentences.",
     standard: "A balanced letter with intro, body, and closer.",
-    concise: "Minimalist — 2–3 strong paragraphs with no filler.",
+    concise: "Minimalist — 2–3 sentences with no filler.",
     elaborate: "Detailed and persuasive — emphasizes skills and experience.",
     startup: "Startup-focused, tech-savvy letter.",
     executive: "Tailored for senior roles — polished and leadership-focused.",
