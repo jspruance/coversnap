@@ -37,7 +37,7 @@ export async function POST(req: Request) {
     case "short":
       styleInstruction = "Keep the cover letter concise and punchy. Just 3–4 sentences. Skip fluff and be direct."
       break
-    case "concise":
+    case "minimal":
       styleInstruction = "Write a minimalist, efficient letter with 2–3 sentences and no filler."
       break
     case "elaborate":

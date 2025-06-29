@@ -84,7 +84,7 @@ export default function Home() {
   }
 
   const styleDescriptions: { [key: string]: string } = {
-    concise: "Minimalist — 2–3 sentences with no filler.",
+    minimal: "Minimalist — 2–3 sentences with no filler.",
     short: "Quick and punchy — 3–4 tight sentences.",
     standard: "A balanced letter with intro, body, and closer.",
     elaborate: "Detailed and persuasive — emphasizes skills and experience.",
