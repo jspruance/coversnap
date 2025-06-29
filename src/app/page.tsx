@@ -83,6 +83,16 @@ export default function Home() {
     setTimeout(() => setCopied(false), 2000)
   }
 
+  const styleDescriptions: { [key: string]: string } = {
+    short: "Quick and punchy — 3–4 tight paragraphs.",
+    standard: "A balanced letter with intro, body, and closer.",
+    concise: "Minimalist — 2–3 strong paragraphs with no filler.",
+    elaborate: "Detailed and persuasive — emphasizes skills and experience.",
+    executive: "Tailored for senior roles — polished and leadership-focused.",
+    creative: "More personality, suitable for design or media jobs.",
+    technical: "Emphasizes hard skills and project impact."
+  }
+
   return (
     <>
       <Head>
@@ -124,9 +134,20 @@ export default function Home() {
                 <div className="h-full flex flex-col">
                   <div className="flex justify-between items-center mb-2">
                     <label className="block text-stone-700 font-medium text-lg">Cover Letter:</label>
-                    <select id="lengthOption" value={lengthOption} onChange={(e) => setLengthOption(e.target.value)} className="border border-stone-300 rounded-md px-2 py-1 text-sm text-stone-600 bg-white">
+                    <select
+                      id="style"
+                      className="border border-stone-300 rounded px-2 py-1"
+                      value={lengthOption}
+                      onChange={(e) => setLengthOption(e.target.value)}
+                      title={styleDescriptions[lengthOption]}
+                    >
                       <option value="short">Short</option>
                       <option value="standard">Standard</option>
+                      <option value="concise">Concise</option>
+                      <option value="elaborate">Elaborate</option>
+                      <option value="executive">Executive</option>
+                      <option value="creative">Creative</option>
+                      <option value="technical">Technical</option>
                     </select>
                   </div>
 
