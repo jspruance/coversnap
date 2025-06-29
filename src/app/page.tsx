@@ -132,11 +132,11 @@ export default function Home() {
                 </div>
 
                 <div className="h-full flex flex-col">
-                  <div className="flex justify-between items-center mb-2">
-                    <label className="block text-stone-700 font-medium text-lg">Cover Letter:</label>
+                  <div className="px-4 py-2">
+                    <label htmlFor="style" className="text-stone-700 font-medium mr-2">Style:</label>
                     <select
                       id="style"
-                      className="border border-stone-300 rounded px-2 py-1"
+                      className="border border-stone-300 rounded px-2 py-1 cursor-pointer bg-white text-stone-700"
                       value={lengthOption}
                       onChange={(e) => setLengthOption(e.target.value)}
                       title={styleDescriptions[lengthOption]}
