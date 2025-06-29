@@ -16,6 +16,7 @@ export default function Home() {
   const [lengthOption, setLengthOption] = useState("short");
   const [toneOption, setToneOption] = useState("standard");
   const [showPaywall, setShowPaywall] = useState(false);
+  const [email, setEmail] = useState("");
   const resultRef = useRef<HTMLDivElement>(null);
   const formRef = useRef<HTMLDivElement>(null);
 
@@ -88,6 +89,21 @@ export default function Home() {
     navigator.clipboard.writeText(output);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
+  };
+
+  const handleEmailSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    const res = await fetch("/api/send-link", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email }),
+    });
+    if (res.ok) {
+      alert("Check your email for the unlock link!");
+      setShowPaywall(false);
+    } else {
+      alert("There was a problem sending your unlock link.");
+    }
   };
 
   const lengthDescriptions: { [key: string]: string } = {
@@ -437,11 +453,11 @@ export default function Home() {
                 Free limit reached
               </h2>
               <p className="text-stone-600 mb-4">
-                You&apos;ve used your 3 free cover letters today.
+                You’ve used your 3 free cover letters today.
                 <br />
                 Unlock unlimited access for a one-time $5.
               </p>
-              <div className="flex justify-center gap-4">
+              <div className="flex flex-col items-center gap-4">
                 <button
                   onClick={() =>
                     (window.location.href =
@@ -449,14 +465,25 @@ export default function Home() {
                   }
                   className="bg-stone-900 text-white px-4 py-2 rounded hover:bg-black cursor-pointer"
                 >
-                  Unlock Now
+                  Unlock Now ($5)
                 </button>
-                <button
-                  onClick={() => setShowPaywall(false)}
-                  className="text-stone-500 px-4 py-2 hover:underline cursor-pointer"
+                <p className="text-sm text-stone-500">
+                  Already paid? Unlock with your email:
+                </p>
+                <form
+                  onSubmit={handleEmailSubmit}
+                  className="w-full flex flex-col items-center gap-2"
                 >
-                  Maybe later
-                </button>
+                  <input
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                    placeholder="you@example.com"
+                    className="border border-stone-300 rounded-md p-2 w-full"
+                  />
+                  <Button type="submit">Send Unlock Link</Button>
+                </form>
               </div>
             </div>
           </div>
