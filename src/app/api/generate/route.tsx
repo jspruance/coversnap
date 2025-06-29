@@ -35,16 +35,16 @@ export async function POST(req: Request) {
   let styleInstruction: string
   switch (length) {
     case "short":
-      styleInstruction = "Make it short and punchy — 3–4 tight paragraphs, very direct."
+      styleInstruction = "Keep the cover letter concise and punchy. Just 3–4 sentences. Skip fluff and be direct."
       break
     case "concise":
-      styleInstruction = "Write a minimalist, efficient letter with 2–3 strong paragraphs and no filler."
+      styleInstruction = "Write a minimalist, efficient letter with 2–3 sentences and no filler."
       break
     case "elaborate":
       styleInstruction = "Write a detailed, persuasive letter emphasizing accomplishments and relevant experience."
       break
     case "executive":
-      styleInstruction = "Craft a polished, leadership-oriented letter tailored for senior-level positions."
+      styleInstruction = "Craft a polished, executive-leadership-oriented letter tailored for senior-level positions."
       break
     case "creative":
       styleInstruction = "Write a creative, personality-driven letter appropriate for design or media jobs."
@@ -54,9 +54,11 @@ export async function POST(req: Request) {
       break
     case "standard":
     default:
-      styleInstruction = "Write a well-structured, balanced cover letter with an intro, body, and closing."
+      styleInstruction = "Write a professional and well-crafted cover letter tailored to the job description."
       break
   }
+
+  console.log(`STYLE INSTURCTION :::: ${styleInstruction}`)
 
   const messages: ChatCompletionMessageParam[] = [
     {
