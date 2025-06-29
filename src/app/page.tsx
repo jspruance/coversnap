@@ -132,7 +132,7 @@ export default function Home() {
                 </div>
 
                 <div className="h-full flex flex-col">
-                   <div className="px-4 py-2 flex flex-col items-start md:flex-row md:justify-end md:items-center gap-2">
+                  <div className="px-4 py-2 flex flex-col items-start md:flex-row md:justify-end md:items-center gap-2">
                     <label htmlFor="style" className="text-stone-700 font-medium md:mr-2">Cover Letter:</label>
                     <select
                       id="style"
