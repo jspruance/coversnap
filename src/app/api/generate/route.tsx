@@ -43,6 +43,9 @@ export async function POST(req: Request) {
     case "elaborate":
       styleInstruction = "Write a detailed, persuasive letter emphasizing accomplishments and relevant experience."
       break
+    case "startup":
+      styleInstruction = "Write a startup-oriented cover letter, at most 2-3 tight paragraphs. Use tech-savvy, Silicon valley startup lingo. No address or placeholders at the top." 
+      break
     case "executive":
       styleInstruction = "Craft a polished, executive-leadership-oriented letter tailored for senior-level positions."
       break
@@ -51,6 +54,9 @@ export async function POST(req: Request) {
       break
     case "technical":
       styleInstruction = "Write a technically focused letter highlighting hard skills, projects, and tools."
+      break
+    case "funny":
+      styleInstruction = "Write a funny cover letter. 1-2 paragraphes at most. No address or placeholders at the top." 
       break
     case "standard":
     default:

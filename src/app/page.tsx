@@ -88,7 +88,7 @@ export default function Home() {
     standard: "A balanced letter with intro, body, and closer.",
     concise: "Minimalist — 2–3 strong paragraphs with no filler.",
     elaborate: "Detailed and persuasive — emphasizes skills and experience.",
-    startup: "Startup - 2-3 tight paragraphs. Use tech-savvy, Silicon valley startup lingo.",
+    startup: "Startup-focused, tech-savvy letter.",
     executive: "Tailored for senior roles — polished and leadership-focused.",
     creative: "More personality, suitable for design or media jobs.",
     technical: "Emphasizes hard skills and project impact.",
