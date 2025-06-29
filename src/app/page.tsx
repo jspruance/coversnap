@@ -132,7 +132,7 @@ export default function Home() {
                 </div>
 
                 <div className="h-full flex flex-col">
-                  <div className="px-4 py-2 flex justify-between items-center">
+                  <div className="mb-2 flex justify-between items-center">
                     <label htmlFor="style" className="text-stone-700 font-medium text-lg">Cover Letter:</label>
                     <select
                       id="style"
