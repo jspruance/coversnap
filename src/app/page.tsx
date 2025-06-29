@@ -141,13 +141,13 @@ export default function Home() {
                       onChange={(e) => setLengthOption(e.target.value)}
                       title={styleDescriptions[lengthOption]}
                     >
-                      <option value="short">Short</option>
-                      <option value="standard">Standard</option>
-                      <option value="concise">Concise</option>
-                      <option value="elaborate">Elaborate</option>
-                      <option value="executive">Executive</option>
-                      <option value="creative">Creative</option>
-                      <option value="technical">Technical</option>
+                      <option value="short" title={styleDescriptions.short}>Short</option>
+                      <option value="standard" title={styleDescriptions.standard}>Standard</option>
+                      <option value="concise" title={styleDescriptions.concise}>Concise</option>
+                      <option value="elaborate" title={styleDescriptions.elaborate}>Elaborate</option>
+                      <option value="executive" title={styleDescriptions.executive}>Executive</option>
+                      <option value="creative" title={styleDescriptions.creative}>Creative</option>
+                      <option value="technical" title={styleDescriptions.technical}>Technical</option>
                     </select>
                   </div>
 
