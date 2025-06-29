@@ -88,17 +88,19 @@ export default function Home() {
     standard: "A balanced letter with intro, body, and closer.",
     concise: "Minimalist — 2–3 strong paragraphs with no filler.",
     elaborate: "Detailed and persuasive — emphasizes skills and experience.",
+    startup: "Startup-focused, tech-savvy letter.",
     executive: "Tailored for senior roles — polished and leadership-focused.",
     creative: "More personality, suitable for design or media jobs.",
-    technical: "Emphasizes hard skills and project impact."
+    technical: "Emphasizes hard skills and project impact.",
+    funny: "Light-hearted and humorous — shows personality while staying professional."
   }
 
   return (
     <>
       <Head>
         <title>CoverSnap – AI-Powered Cover Letters</title>
-        <link rel="icon" href="/favicon.ico" />
         <meta name="description" content="Generate personalized, professional cover letters in seconds with AI. Paste the job description and get started instantly." />
+        <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <main className="min-h-screen bg-gradient-to-b from-white via-stone-50 to-stone-100 px-0 relative overflow-hidden">
@@ -132,25 +134,20 @@ export default function Home() {
                 </div>
 
                 <div className="h-full flex flex-col">
-                  <div className="flex justify-between items-center mb-2">
-                    <label className="block text-stone-700 font-medium text-lg">Cover Letter:</label>
+                  <div className="mb-2 flex justify-between items-center">
+                    <label htmlFor="style" className="text-stone-700 font-medium text-lg">Cover Letter:</label>
                     <select
                       id="style"
-                      className="border border-stone-300 rounded px-2 py-1"
+                      className="border border-stone-300 rounded px-2 py-0 cursor-pointer bg-white text-stone-700"
                       value={lengthOption}
                       onChange={(e) => setLengthOption(e.target.value)}
                       title={styleDescriptions[lengthOption]}
                     >
-                      <option value="short">Short</option>
-                      <option value="standard">Standard</option>
-                      <option value="concise">Concise</option>
-                      <option value="elaborate">Elaborate</option>
-                      <option value="executive">Executive</option>
-                      <option value="creative">Creative</option>
-                      <option value="technical">Technical</option>
+                      {Object.entries(styleDescriptions).map(([value, label]) => (
+                        <option key={value} value={value} title={label}>{value.charAt(0).toUpperCase() + value.slice(1)}</option>
+                      ))}
                     </select>
                   </div>
-
                   <div ref={resultRef} className="relative h-[450px] overflow-y-auto p-5 bg-stone-50 border border-stone-200 rounded-lg text-left shadow-sm whitespace-pre-line">
                     {output && (
                       <button type="button" onClick={handleCopy} className="absolute top-2 right-2 text-sm text-stone-500 hover:text-stone-700 flex items-center gap-1 cursor-pointer">
@@ -185,29 +182,16 @@ export default function Home() {
 
         <section className="text-center py-12">
           <div className="flex justify-center gap-6 mb-12">
-            <a
-              href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(
-                "Just generated a killer AI cover letter in seconds with CoverSnap! Try it free:"
-              )}&url=https://coversnapapp.com`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center px-4 py-2 border border-stone-300 rounded-md text-sm text-stone-700 hover:bg-stone-100"
-            >
+            <a href={`https://twitter.com/intent/tweet?text=${encodeURIComponent("Just generated a killer AI cover letter in seconds with CoverSnap! Try it free:")}&url=https://coversnapapp.com`} target="_blank" rel="noopener noreferrer" className="inline-flex items-center px-4 py-2 border border-stone-300 rounded-md text-sm text-stone-700 hover:bg-stone-100">
               <Twitter className="w-4 h-4 mr-2" /> Share on Twitter
             </a>
-            <a
-              href="https://www.linkedin.com/sharing/share-offsite/?url=https://coversnapapp.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center px-4 py-2 border border-stone-300 rounded-md text-sm text-stone-700 hover:bg-stone-100"
-            >
+            <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://coversnapapp.com" target="_blank" rel="noopener noreferrer" className="inline-flex items-center px-4 py-2 border border-stone-300 rounded-md text-sm text-stone-700 hover:bg-stone-100">
               <Linkedin className="w-4 h-4 mr-2" /> Share on LinkedIn
             </a>
           </div>
 
           <blockquote className="italic text-stone-600 text-lg max-w-xl mx-auto">
-            “CoverSnap streamlined my entire application process — I had tailored letters out in minutes.”
-            <br />
+            “CoverSnap streamlined my entire application process — I had tailored letters out in minutes.”<br />
             <span className="not-italic text-sm text-stone-500">— Bob Jenkins, Phoenix, AZ</span>
           </blockquote>
         </section>
@@ -229,23 +213,12 @@ export default function Home() {
             <div className="bg-white rounded-lg p-6 shadow-lg max-w-sm w-full text-center">
               <h2 className="text-lg font-semibold text-stone-800 mb-2">Free limit reached</h2>
               <p className="text-stone-600 mb-4">
-                You&apos;ve used your 3 free cover letters today.
-                <br />
+                You&apos;ve used your 3 free cover letters today.<br />
                 Unlock unlimited access for a one-time $5.
               </p>
               <div className="flex justify-center gap-4">
-                <button
-                  onClick={() => window.location.href = "https://buy.stripe.com/3cIeVd5QIeOt1M5emQebu03"}
-                  className="bg-stone-900 text-white px-4 py-2 rounded hover:bg-black cursor-pointer"
-                >
-                  Unlock Now
-                </button>
-                <button
-                  onClick={() => setShowPaywall(false)}
-                  className="text-stone-500 px-4 py-2 hover:underline cursor-pointer"
-                >
-                  Maybe later
-                </button>
+                <button onClick={() => window.location.href = "https://buy.stripe.com/3cIeVd5QIeOt1M5emQebu03"} className="bg-stone-900 text-white px-4 py-2 rounded hover:bg-black cursor-pointer">Unlock Now</button>
+                <button onClick={() => setShowPaywall(false)} className="text-stone-500 px-4 py-2 hover:underline cursor-pointer">Maybe later</button>
               </div>
             </div>
           </div>
