@@ -132,24 +132,25 @@ export default function Home() {
                 </div>
 
                 <div className="h-full flex flex-col">
-                  <div className="px-4 py-2 flex flex-col items-start md:flex-row md:justify-end md:items-center gap-2">
-                    <label htmlFor="style" className="text-stone-700 font-medium md:mr-2">Cover Letter:</label>
+                  <div className="flex justify-between items-center mb-2">
+                    <label className="block text-stone-700 font-medium text-lg">Cover Letter:</label>
                     <select
                       id="style"
-                      className="border border-stone-300 rounded px-2 py-1 cursor-pointer bg-white text-stone-700"
+                      className="border border-stone-300 rounded px-2 py-1 cursor-pointer"
                       value={lengthOption}
                       onChange={(e) => setLengthOption(e.target.value)}
                       title={styleDescriptions[lengthOption]}
                     >
-                      <option value="short" title={styleDescriptions.short}>Short</option>
-                      <option value="standard" title={styleDescriptions.standard}>Standard</option>
-                      <option value="concise" title={styleDescriptions.concise}>Concise</option>
-                      <option value="elaborate" title={styleDescriptions.elaborate}>Elaborate</option>
-                      <option value="executive" title={styleDescriptions.executive}>Executive</option>
-                      <option value="creative" title={styleDescriptions.creative}>Creative</option>
-                      <option value="technical" title={styleDescriptions.technical}>Technical</option>
+                      <option value="short">Short</option>
+                      <option value="standard">Standard</option>
+                      <option value="concise">Concise</option>
+                      <option value="elaborate">Elaborate</option>
+                      <option value="executive">Executive</option>
+                      <option value="creative">Creative</option>
+                      <option value="technical">Technical</option>
                     </select>
                   </div>
+
                   <div ref={resultRef} className="relative h-[450px] overflow-y-auto p-5 bg-stone-50 border border-stone-200 rounded-lg text-left shadow-sm whitespace-pre-line">
                     {output && (
                       <button type="button" onClick={handleCopy} className="absolute top-2 right-2 text-sm text-stone-500 hover:text-stone-700 flex items-center gap-1 cursor-pointer">
