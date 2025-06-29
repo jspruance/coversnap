@@ -132,8 +132,8 @@ export default function Home() {
                 </div>
 
                 <div className="h-full flex flex-col">
-                  <div className="px-4 py-2">
-                    <label htmlFor="style" className="text-stone-700 font-medium mr-2">Style:</label>
+                   <div className="px-4 py-2 flex justify-end items-center gap-2">
+                    <label htmlFor="style" className="text-stone-700 font-medium">Cover Letter:</label>
                     <select
                       id="style"
                       className="border border-stone-300 rounded px-2 py-1 cursor-pointer bg-white text-stone-700"
@@ -150,7 +150,6 @@ export default function Home() {
                       <option value="technical" title={styleDescriptions.technical}>Technical</option>
                     </select>
                   </div>
-
                   <div ref={resultRef} className="relative h-[450px] overflow-y-auto p-5 bg-stone-50 border border-stone-200 rounded-lg text-left shadow-sm whitespace-pre-line">
                     {output && (
                       <button type="button" onClick={handleCopy} className="absolute top-2 right-2 text-sm text-stone-500 hover:text-stone-700 flex items-center gap-1 cursor-pointer">
