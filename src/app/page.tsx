@@ -444,7 +444,7 @@ export default function Home() {
                 <button
                   onClick={() =>
                     (window.location.href =
-                      "https://buy.stripe.com/3cIeVd5QIeOt1M5emQebu03")
+                      "https://buy.stripe.com/00waEX5QIdKpaiB92webu04")
                   }
                   className="bg-stone-900 text-white px-4 py-2 rounded hover:bg-black cursor-pointer"
                 >
