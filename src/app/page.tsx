@@ -324,6 +324,44 @@ export default function Home() {
           </div>
         </section>
 
+        <section className="w-full bg-white text-center py-28 px-0">
+          <h3 className="text-2xl font-semibold text-stone-700 mb-12">
+            CoverSnap has helped candidates get jobs at:
+          </h3>
+          <div className="flex justify-center items-center gap-10 flex-wrap opacity-70 max-w-6xl mx-auto">
+            <img
+              src="/logos/google.png"
+              alt="Google"
+              className="h-10 grayscale"
+            />
+            <img
+              src="/logos/microsoft.png"
+              alt="Microsoft"
+              className="h-10 grayscale"
+            />
+            <img
+              src="/logos/apple.png"
+              alt="Apple"
+              className="h-10 grayscale"
+            />
+            <img
+              src="/logos/nvidia.png"
+              alt="Nvidia"
+              className="h-10 grayscale"
+            />
+            <img
+              src="/logos/amazon.png"
+              alt="Amazon"
+              className="h-10 grayscale"
+            />
+            <img
+              src="/logos/adobe.png"
+              alt="Adobe"
+              className="h-10 grayscale"
+            />
+          </div>
+        </section>
+
         <section className="bg-white py-24 px-4">
           <h3 className="text-2xl font-semibold text-center text-stone-700 mb-12">
             What people are saying
