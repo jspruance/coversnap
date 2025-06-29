@@ -434,37 +434,26 @@ export default function Home() {
                 Free limit reached
               </h2>
               <p className="text-stone-600 mb-4">
-                You’ve used your 3 free cover letters today.
+                You&apos;ve used your 3 free cover letters today.
                 <br />
                 Unlock unlimited access for a one-time $5.
               </p>
-              <div className="flex flex-col items-center gap-4">
+              <div className="flex justify-center gap-4">
                 <button
                   onClick={() =>
                     (window.location.href =
-                      "https://buy.stripe.com/00waEX5QIdKpaiB92webu04")
+                      "https://buy.stripe.com/3cIeVd5QIeOt1M5emQebu03")
                   }
                   className="bg-stone-900 text-white px-4 py-2 rounded hover:bg-black cursor-pointer"
                 >
-                  Unlock Now ($5)
+                  Unlock Now
                 </button>
-                <p className="text-sm text-stone-500">
-                  Already paid? Unlock with your email:
-                </p>
-                <form
-                  onSubmit={handleEmailSubmit}
-                  className="w-full flex flex-col items-center gap-2"
+                <button
+                  onClick={() => setShowPaywall(false)}
+                  className="text-stone-500 px-4 py-2 hover:underline cursor-pointer"
                 >
-                  <input
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                    placeholder="you@example.com"
-                    className="border border-stone-300 rounded-md p-2 w-full"
-                  />
-                  <Button type="submit">Send Unlock Link</Button>
-                </form>
+                  Maybe later
+                </button>
               </div>
             </div>
           </div>
