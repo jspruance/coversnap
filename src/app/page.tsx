@@ -13,7 +13,8 @@ export default function Home() {
   const [loading, setLoading] = useState(false);
   const [copied, setCopied] = useState(false);
   const [cooldown, setCooldown] = useState(0);
-  const [lengthOption, setLengthOption] = useState("standard");
+  const [lengthOption, setLengthOption] = useState("short");
+  const [toneOption, setToneOption] = useState("standard");
   const [showPaywall, setShowPaywall] = useState(false);
   const resultRef = useRef<HTMLDivElement>(null);
   const formRef = useRef<HTMLDivElement>(null);
@@ -66,7 +67,11 @@ export default function Home() {
     const res = await fetch("/api/generate", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ input: inputValue.trim(), length: lengthOption }),
+      body: JSON.stringify({
+        input: inputValue.trim(),
+        length: lengthOption,
+        tone: toneOption,
+      }),
     });
 
     const data = await res.json();
@@ -85,11 +90,15 @@ export default function Home() {
     setTimeout(() => setCopied(false), 2000);
   };
 
-  const styleDescriptions: { [key: string]: string } = {
-    minimal: "Minimalist — 2–3 sentences with no filler.",
-    short: "Quick and punchy — 3–4 tight sentences.",
+  const lengthDescriptions: { [key: string]: string } = {
+    minimal: "Ultra-brief — ideal for informal applications.",
+    short: "Quick and punchy — 3–4 tight paragraphs.",
     standard: "A balanced letter with intro, body, and closer.",
     elaborate: "Detailed and persuasive — emphasizes skills and experience.",
+  };
+
+  const toneDescriptions: { [key: string]: string } = {
+    professional: "Professional tone suitable for most jobs.",
     startup: "Startup-focused, tech-savvy letter.",
     executive: "Tailored for senior roles — polished and leadership-focused.",
     creative: "More personality, suitable for design or media jobs.",
@@ -186,22 +195,36 @@ export default function Home() {
                     >
                       Cover Letter:
                     </label>
-                    <select
-                      id="style"
-                      className="border border-stone-300 rounded px-2 py-0 cursor-pointer bg-white text-stone-700"
-                      value={lengthOption}
-                      onChange={(e) => setLengthOption(e.target.value)}
-                      title={styleDescriptions[lengthOption]}
-                    >
-                      {Object.entries(styleDescriptions).map(
-                        ([value, label]) => (
-                          <option key={value} value={value} title={label}>
-                            {value.charAt(0).toUpperCase() + value.slice(1)}
-                          </option>
-                        )
-                      )}
-                    </select>
+                    <div>
+                      <select
+                        id="length"
+                        className="border border-stone-300 rounded px-2 py-1 cursor-pointer bg-white text-stone-700"
+                        value={lengthOption}
+                        onChange={(e) => setLengthOption(e.target.value)}
+                        title={lengthDescriptions[lengthOption]}
+                      >
+                        <option value="minimal">Minimal</option>
+                        <option value="short">Short</option>
+                        <option value="standard">Standard</option>
+                        <option value="elaborate">Elaborate</option>
+                      </select>
+                      <select
+                        id="tone"
+                        className="border border-stone-300 rounded ml-5 px-2 py-1 cursor-pointer bg-white text-stone-700"
+                        value={toneOption}
+                        onChange={(e) => setToneOption(e.target.value)}
+                        title={toneDescriptions[toneOption]}
+                      >
+                        <option value="professional">Professional</option>
+                        <option value="startup">Startup</option>
+                        <option value="executive">Executive</option>
+                        <option value="technical">Technical</option>
+                        <option value="creative">Creative</option>
+                        <option value="funny">Funny</option>
+                      </select>
+                    </div>
                   </div>
+
                   <div
                     ref={resultRef}
                     className="relative h-[450px] overflow-y-auto p-5 bg-stone-50 border border-stone-200 rounded-lg text-left shadow-sm whitespace-pre-line"
