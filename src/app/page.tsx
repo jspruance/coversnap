@@ -182,10 +182,23 @@ export default function Home() {
 
         <section className="text-center py-12">
           <div className="flex justify-center gap-6 mb-12">
-            <a href={`https://twitter.com/intent/tweet?text=${encodeURIComponent("Just generated a killer AI cover letter in seconds with CoverSnap! Try it free:")}&url=https://coversnapapp.com`} target="_blank" rel="noopener noreferrer" className="inline-flex items-center px-4 py-2 border border-stone-300 rounded-md text-sm text-stone-700 hover:bg-stone-100">
-              <Twitter className="w-4 h-4 mr-2" /> Share on Twitter
+            <a
+              href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(
+                "Just generated a killer AI cover letter in seconds with CoverSnap! Try it free:"
+              )}&url=https://coversnapapp.com`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center px-4 py-2 rounded-md text-white bg-[#1DA1F2] hover:bg-[#1a91da] transition"
+            >
+              <Twitter className="w-4 h-4 mr-2" /> Share on X
             </a>
-            <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://coversnapapp.com" target="_blank" rel="noopener noreferrer" className="inline-flex items-center px-4 py-2 border border-stone-300 rounded-md text-sm text-stone-700 hover:bg-stone-100">
+
+            <a
+              href="https://www.linkedin.com/sharing/share-offsite/?url=https://coversnapapp.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center px-4 py-2 rounded-md text-white bg-[#0077B5] hover:bg-[#006699] transition"
+            >
               <Linkedin className="w-4 h-4 mr-2" /> Share on LinkedIn
             </a>
           </div>
