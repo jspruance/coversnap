@@ -334,37 +334,55 @@ export default function Home() {
           <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
             {[
               {
-                quote: "I had tailored letters out in minutes. Game-changer!",
+                quote:
+                  "I had tailored letters out in minutes. Game-changer! ✨",
                 name: "Bob Jenkins",
                 location: "Phoenix, AZ",
               },
               {
                 quote:
-                  "My application response rate doubled after using CoverSnap.",
+                  "My application response rate doubled after using CoverSnap. 📈",
                 name: "Alicia Romero",
                 location: "Austin, TX",
               },
               {
-                quote: "Finally — a tool that writes like a real human.",
+                quote: "Finally — a tool that writes like a real human. 🤖",
                 name: "Mark Fields",
                 location: "Chicago, IL",
               },
               {
                 quote:
-                  "Super clean, fast, and zero fluff. Exactly what I needed.",
+                  "Super clean, fast, and zero fluff. Exactly what I needed. ⚡️",
                 name: "Priya Mehta",
                 location: "San Francisco, CA",
               },
               {
-                quote: "I stopped dreading cover letters. That’s huge.",
+                quote: "I stopped dreading cover letters. That’s huge. 😌",
                 name: "Devon Lee",
                 location: "New York, NY",
+              },
+              {
+                quote:
+                  "Got the job after using CoverSnap once. Unbelievable! 🚀",
+                name: "Tina Alvarez",
+                location: "Miami, FL",
+              },
+              {
+                quote: "The tone and polish were spot on — felt like magic. ✍️",
+                name: "David Kim",
+                location: "Seattle, WA",
+              },
+              {
+                quote: "Love how fast and simple it is. Total no-brainer. 🙌",
+                name: "Sarah Chen",
+                location: "Denver, CO",
               },
             ].map(({ quote, name, location }, i) => (
               <div
                 key={i}
                 className="bg-stone-50 border border-stone-200 rounded-xl shadow-sm p-6 flex flex-col justify-between"
               >
+                <div className="text-yellow-400 text-sm mb-2">★★★★★</div>
                 <p className="text-stone-600 italic mb-4">“{quote}”</p>
                 <p className="text-sm text-stone-500">
                   — {name}, <span className="not-italic">{location}</span>
