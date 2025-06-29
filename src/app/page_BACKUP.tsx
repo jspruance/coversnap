@@ -3,16 +3,14 @@
 import { useState, useRef, useEffect } from "react";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
-import { Copy, Twitter, Linkedin } from "lucide-react";
+import { Copy } from "lucide-react";
 import Head from "next/head";
 import Image from "next/image";
 import {
-  FacebookShareButton,
   LinkedinShareButton,
   TwitterShareButton,
   RedditShareButton,
   EmailShareButton,
-  FacebookIcon,
   LinkedinIcon,
   TwitterIcon,
   RedditIcon,
@@ -287,8 +285,8 @@ export default function Home() {
                       {loading
                         ? "Generating..."
                         : cooldown > 0
-                        ? `Please wait ${cooldown}s`
-                        : "Generate Cover Letter"}
+                          ? `Please wait ${cooldown}s`
+                          : "Generate Cover Letter"}
                     </Button>
                   </div>
                 </div>
