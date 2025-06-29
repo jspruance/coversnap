@@ -1,4 +1,3 @@
-// File: app/api/generate/route.ts
 import { NextResponse } from "next/server"
 import OpenAI from "openai"
 import { ChatCompletionMessageParam } from "openai/resources/chat/completions"
@@ -32,34 +31,48 @@ export async function POST(req: Request) {
     }
   }
 
-  const prompts: { [key: string]: string } = {
-    short: "Write a short, punchy cover letter (3–4 tight paragraphs) for the following job:\n\n",
-    standard: "Write a balanced cover letter with intro, body, and closing for the following job:\n\n",
-    concise: "Write a concise, no-filler cover letter (2–3 strong paragraphs) for the following job:\n\n",
-    elaborate: "Write a detailed, persuasive cover letter emphasizing skills and experience for the following job:\n\n",
-    executive: "Write a polished, leadership-focused cover letter suitable for an executive role:\n\n",
-    creative: "Write a creative, personality-driven cover letter for a design or media position:\n\n",
-    technical: "Write a technically detailed cover letter highlighting hard skills and project outcomes:\n\n"
+  // Map each length/style option to specific prompt behavior
+  let styleInstruction: string
+  switch (length) {
+    case "short":
+      styleInstruction = "Make it short and punchy — 3–4 tight paragraphs, very direct."
+      break
+    case "concise":
+      styleInstruction = "Write a minimalist, efficient letter with 2–3 strong paragraphs and no filler."
+      break
+    case "elaborate":
+      styleInstruction = "Write a detailed, persuasive letter emphasizing accomplishments and relevant experience."
+      break
+    case "executive":
+      styleInstruction = "Craft a polished, leadership-oriented letter tailored for senior-level positions."
+      break
+    case "creative":
+      styleInstruction = "Write a creative, personality-driven letter appropriate for design or media jobs."
+      break
+    case "technical":
+      styleInstruction = "Write a technically focused letter highlighting hard skills, projects, and tools."
+      break
+    case "standard":
+    default:
+      styleInstruction = "Write a well-structured, balanced cover letter with an intro, body, and closing."
+      break
   }
-
-  const prompt = prompts[length] || prompts["standard"]
 
   const messages: ChatCompletionMessageParam[] = [
     {
       role: "system",
-      content: "You are an expert career coach and professional writer. Follow best practices for tone, clarity, and structure.",
+      content: `You are an expert cover letter writer. ${styleInstruction}`
     },
     {
       role: "user",
-      content: prompt + input,
-    },
+      content: `Here's the job description:\n\n${input}`
+    }
   ]
 
-  // main LLM call
   const completion = await openai.chat.completions.create({
     model: "gpt-4o",
     messages,
-    temperature: 0.7,
+    temperature: 0.7
   })
 
   const usage = completion.usage
