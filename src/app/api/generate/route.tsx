@@ -32,31 +32,36 @@ export async function POST(req: Request) {
     }
   }
 
-  // Construct dynamic prompt based on user length preference
-  const lengthPrompt =
-    length === "short"
-      ? "Keep the cover letter concise and punchy. Just 3–4 sentences. Skip fluff and be direct."
-      : "Write a professional and well-crafted cover letter tailored to the job description."
+  const prompts: { [key: string]: string } = {
+    short: "Write a short, punchy cover letter (3–4 tight paragraphs) for the following job:\n\n",
+    standard: "Write a balanced cover letter with intro, body, and closing for the following job:\n\n",
+    concise: "Write a concise, no-filler cover letter (2–3 strong paragraphs) for the following job:\n\n",
+    elaborate: "Write a detailed, persuasive cover letter emphasizing skills and experience for the following job:\n\n",
+    executive: "Write a polished, leadership-focused cover letter suitable for an executive role:\n\n",
+    creative: "Write a creative, personality-driven cover letter for a design or media position:\n\n",
+    technical: "Write a technically detailed cover letter highlighting hard skills and project outcomes:\n\n"
+  }
+
+  const prompt = prompts[length] || prompts["standard"]
 
   const messages: ChatCompletionMessageParam[] = [
     {
       role: "system",
-      content: `You are an expert career coach and writer. ${lengthPrompt}`,
+      content: "You are an expert career coach and professional writer. Follow best practices for tone, clarity, and structure.",
     },
     {
       role: "user",
-      content: `Here's the job description:\n\n${input}`,
+      content: prompt + input,
     },
   ]
 
-  // Main LLM call
+  // main LLM call
   const completion = await openai.chat.completions.create({
     model: "gpt-4o",
     messages,
     temperature: 0.7,
   })
 
-  // Token usage logging
   const usage = completion.usage
   console.log(
     `Tokens used: prompt ${usage?.prompt_tokens}, completion ${usage?.completion_tokens}, total ${usage?.total_tokens}`
