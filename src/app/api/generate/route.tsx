@@ -58,8 +58,6 @@ export async function POST(req: Request) {
       break
   }
 
-  console.log(`STYLE INSTURCTION :::: ${styleInstruction}`)
-
   const messages: ChatCompletionMessageParam[] = [
     {
       role: "system",
