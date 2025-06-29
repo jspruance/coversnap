@@ -295,35 +295,6 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="bg-stone-100 text-center py-20 px-4">
-          <h3 className="text-2xl font-bold text-stone-800 mb-2">
-            🎉 Help others land their next job
-          </h3>
-          <p className="text-stone-600 mb-6">
-            Love CoverSnap? Share it with a friend, colleague, or your followers
-            — it might help someone get hired.
-          </p>
-
-          <div className="flex flex-wrap justify-center gap-4">
-            <TwitterShareButton url={shareUrl} title={title}>
-              <TwitterIcon size={40} round />
-            </TwitterShareButton>
-            <LinkedinShareButton url={shareUrl}>
-              <LinkedinIcon size={40} round />
-            </LinkedinShareButton>
-            <RedditShareButton url={shareUrl} title={title}>
-              <RedditIcon size={40} round />
-            </RedditShareButton>
-            <EmailShareButton
-              url={shareUrl}
-              subject="CoverSnap"
-              body={`${title} ${shareUrl}`}
-            >
-              <EmailIcon size={40} round />
-            </EmailShareButton>
-          </div>
-        </section>
-
         <section className="w-full bg-white text-center py-28 px-0">
           <h3 className="text-2xl font-semibold text-stone-700 mb-12">
             CoverSnap has helped candidates get jobs at:
@@ -359,6 +330,35 @@ export default function Home() {
               alt="Adobe"
               className="h-10 grayscale"
             />
+          </div>
+        </section>
+
+        <section className="bg-stone-100 text-center py-20 px-4">
+          <h3 className="text-2xl font-bold text-stone-800 mb-2">
+            🎉 Help others land their next job
+          </h3>
+          <p className="text-stone-600 mb-6">
+            Love CoverSnap? Share it with a friend, colleague, or your followers
+            — it might help someone get hired.
+          </p>
+
+          <div className="flex flex-wrap justify-center gap-4">
+            <TwitterShareButton url={shareUrl} title={title}>
+              <TwitterIcon size={40} round />
+            </TwitterShareButton>
+            <LinkedinShareButton url={shareUrl}>
+              <LinkedinIcon size={40} round />
+            </LinkedinShareButton>
+            <RedditShareButton url={shareUrl} title={title}>
+              <RedditIcon size={40} round />
+            </RedditShareButton>
+            <EmailShareButton
+              url={shareUrl}
+              subject="CoverSnap"
+              body={`${title} ${shareUrl}`}
+            >
+              <EmailIcon size={40} round />
+            </EmailShareButton>
           </div>
         </section>
 
