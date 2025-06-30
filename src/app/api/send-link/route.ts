@@ -12,7 +12,7 @@ export async function POST(req: Request) {
   const link = `${process.env.NEXT_PUBLIC_APP_URL}/unlocked?token=${token}`;
 
   await resend.emails.send({
-    from: "CoverSnap <noreply@coversnap.app>",
+    from: "CoverSnap <noreply@coversnapapp.com>",
     to: email,
     subject: "Unlock your CoverSnap access",
     html: `<p>Click to unlock unlimited access:<br/><a href="${link}">${link}</a></p>`,
