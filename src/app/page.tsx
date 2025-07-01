@@ -315,7 +315,7 @@ export default function Home() {
                 </p>
               </div>
             </form>
-            <div className="mt-6 flex justify-end">
+            <div className="mt-6 flex justify-center md:justify-end">
               <Button
                 type="submit"
                 onClick={handleSubmit}
