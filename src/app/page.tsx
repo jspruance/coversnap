@@ -75,6 +75,12 @@ export default function Home() {
     localStorage.setItem("coversnap_resume", resume);
   }, [resume]);
 
+  useEffect(() => {
+    if (output && resultRef.current) {
+      resultRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [output]);
+
   const handleClearResume = () => {
     setResume("");
     localStorage.removeItem("coversnap_resume");
@@ -259,7 +265,10 @@ export default function Home() {
                   </div>
                 </div>
 
-                <div className="relative h-full min-h-[420px] overflow-y-auto p-5 bg-stone-50 border border-stone-200 rounded-lg text-left shadow-sm whitespace-pre-line">
+                <div
+                  ref={resultRef}
+                  className="relative h-full min-h-[420px] overflow-y-auto p-5 bg-stone-50 border border-stone-200 rounded-lg text-left shadow-sm whitespace-pre-line"
+                >
                   {output && (
                     <button
                       type="button"
