@@ -19,6 +19,7 @@ import {
 
 export default function Home() {
   const [inputValue, setInputValue] = useState("");
+  const [resume, setResume] = useState("");
   const [output, setOutput] = useState("");
   const [loading, setLoading] = useState(false);
   const [copied, setCopied] = useState(false);
@@ -63,6 +64,28 @@ export default function Home() {
     return () => clearTimeout(timer);
   }, [cooldown]);
 
+  // Load from localStorage on mount
+  useEffect(() => {
+    const saved = localStorage.getItem("coversnap_resume");
+    if (saved) setResume(saved);
+  }, []);
+
+  // Save to localStorage on change
+  useEffect(() => {
+    localStorage.setItem("coversnap_resume", resume);
+  }, [resume]);
+
+  useEffect(() => {
+    if (output && resultRef.current) {
+      resultRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [output]);
+
+  const handleClearResume = () => {
+    setResume("");
+    localStorage.removeItem("coversnap_resume");
+  };
+
   const handleSubmit = async (
     e: React.FormEvent<HTMLFormElement> | React.MouseEvent<HTMLButtonElement>
   ) => {
@@ -84,6 +107,7 @@ export default function Home() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         input: inputValue.trim(),
+        resume: resume.trim(),
         length: lengthOption,
         tone: toneOption,
       }),
@@ -179,119 +203,132 @@ export default function Home() {
 
             <form
               onSubmit={handleSubmit}
-              className="flex flex-col gap-6 text-left"
+              className="grid grid-cols-1 md:grid-cols-2 md:grid-rows-2 gap-6 items-start text-left"
             >
-              <div className="grid grid-cols-1 md:grid-cols-[1.1fr_1fr] gap-6 items-stretch">
-                <div className="h-full flex flex-col">
-                  <div className="flex justify-between items-center mb-2">
-                    <label
-                      htmlFor="jobDescription"
-                      className="text-stone-700 font-medium text-lg"
+              {/* Job Description */}
+              <div className="flex flex-col">
+                <label
+                  htmlFor="jobDescription"
+                  className="text-stone-700 font-medium text-lg mb-2"
+                >
+                  Job Description:
+                </label>
+                <Textarea
+                  id="jobDescription"
+                  value={inputValue}
+                  onChange={(e) => setInputValue(e.target.value)}
+                  placeholder="Paste the job description here..."
+                  className="w-full h-[180px] text-base p-4 rounded-lg border border-stone-300 resize-none"
+                />
+                <p className="text-sm text-stone-500 mt-2">
+                  💡 Works great with content pasted from LinkedIn or other job
+                  boards.
+                </p>
+              </div>
+
+              {/* Cover Letter Output (spans 2 rows) */}
+              <div className="md:row-span-2 flex flex-col h-full">
+                <div className="mb-2 flex justify-between items-center">
+                  <label
+                    htmlFor="style"
+                    className="text-stone-700 font-medium text-lg"
+                  >
+                    Cover Letter:
+                  </label>
+                  <div className="w-full sm:w-auto flex flex-col sm:flex-row gap-2 w-full">
+                    <select
+                      id="length"
+                      className="w-full sm:w-auto border border-stone-300 rounded px-2 py-1 bg-white text-stone-700"
+                      value={lengthOption}
+                      onChange={(e) => setLengthOption(e.target.value)}
+                      title={lengthDescriptions[lengthOption]}
                     >
-                      Job Description:
-                    </label>
-                    {inputValue && (
-                      <button
-                        onClick={() => {
-                          setInputValue("");
-                          setOutput("");
-                        }}
-                        className="text-sm text-stone-400 hover:text-stone-600 underline cursor-pointer"
-                      >
-                        Start over
-                      </button>
-                    )}
+                      <option value="minimal">Minimal</option>
+                      <option value="short">Short</option>
+                      <option value="standard">Standard</option>
+                      <option value="elaborate">Elaborate</option>
+                    </select>
+                    <select
+                      id="tone"
+                      className="w-full sm:w-auto border border-stone-300 rounded ml-3 px-2 py-1 bg-white text-stone-700"
+                      value={toneOption}
+                      onChange={(e) => setToneOption(e.target.value)}
+                      title={toneDescriptions[toneOption]}
+                    >
+                      <option value="professional">Professional</option>
+                      <option value="startup">Startup</option>
+                      <option value="executive">Executive</option>
+                      <option value="technical">Technical</option>
+                      <option value="creative">Creative</option>
+                      <option value="funny">Funny</option>
+                    </select>
                   </div>
-                  <div className="h-[450px] overflow-y-auto">
-                    <Textarea
-                      id="jobDescription"
-                      value={inputValue}
-                      onChange={(e) => setInputValue(e.target.value)}
-                      placeholder="Paste the job description here..."
-                      className="w-full h-full text-base p-4 rounded-lg border border-stone-300 resize-none"
-                    />
-                  </div>
-                  <p className="text-sm text-stone-500 mt-2">
-                    💡 Works great with content pasted from LinkedIn or other
-                    job boards.
+                </div>
+
+                <div
+                  ref={resultRef}
+                  className="relative h-full min-h-[420px] overflow-y-auto p-5 bg-stone-50 border border-stone-200 rounded-lg text-left shadow-sm whitespace-pre-line"
+                >
+                  {output && (
+                    <button
+                      type="button"
+                      onClick={handleCopy}
+                      className="absolute top-2 right-2 text-sm text-stone-500 hover:text-stone-700 flex items-center gap-1 cursor-pointer"
+                    >
+                      <Copy className="w-4 h-4" /> {copied ? "Copied" : "Copy"}
+                    </button>
+                  )}
+                  <p className={`text-stone-600 ${output ? "mt-8" : ""}`}>
+                    {output ||
+                      "Your AI-generated cover letter will appear here."}
                   </p>
                 </div>
+              </div>
 
-                <div className="h-full flex flex-col">
-                  <div className="mb-2 flex justify-between items-center">
-                    <label
-                      htmlFor="style"
-                      className="text-stone-700 font-medium text-lg"
-                    >
-                      Cover Letter:
-                    </label>
-                    <div>
-                      <select
-                        id="length"
-                        className="border border-stone-300 rounded px-2 py-1 cursor-pointer bg-white text-stone-700"
-                        value={lengthOption}
-                        onChange={(e) => setLengthOption(e.target.value)}
-                        title={lengthDescriptions[lengthOption]}
-                      >
-                        <option value="minimal">Minimal</option>
-                        <option value="short">Short</option>
-                        <option value="standard">Standard</option>
-                        <option value="elaborate">Elaborate</option>
-                      </select>
-                      <select
-                        id="tone"
-                        className="border border-stone-300 rounded ml-5 px-2 py-1 cursor-pointer bg-white text-stone-700"
-                        value={toneOption}
-                        onChange={(e) => setToneOption(e.target.value)}
-                        title={toneDescriptions[toneOption]}
-                      >
-                        <option value="professional">Professional</option>
-                        <option value="startup">Startup</option>
-                        <option value="executive">Executive</option>
-                        <option value="technical">Technical</option>
-                        <option value="creative">Creative</option>
-                        <option value="funny">Funny</option>
-                      </select>
-                    </div>
-                  </div>
-
-                  <div
-                    ref={resultRef}
-                    className="relative h-[450px] overflow-y-auto p-5 bg-stone-50 border border-stone-200 rounded-lg text-left shadow-sm whitespace-pre-line"
+              {/* Resume (bottom left) */}
+              <div className="flex flex-col">
+                <label
+                  htmlFor="resume"
+                  className="text-stone-700 font-medium text-lg mb-2"
+                >
+                  Resume (Optional):
+                </label>
+                {resume && (
+                  <button
+                    type="button"
+                    onClick={handleClearResume}
+                    className="text-sm text-stone-400 hover:text-stone-600 underline cursor-pointer mb-1"
                   >
-                    {output && (
-                      <button
-                        type="button"
-                        onClick={handleCopy}
-                        className="absolute top-2 right-2 text-sm text-stone-500 hover:text-stone-700 flex items-center gap-1 cursor-pointer"
-                      >
-                        <Copy className="w-4 h-4" />{" "}
-                        {copied ? "Copied" : "Copy"}
-                      </button>
-                    )}
-                    <p className={`text-stone-600 ${output ? "mt-8" : ""}`}>
-                      {output ||
-                        "Your AI-generated cover letter will appear here."}
-                    </p>
-                  </div>
-
-                  <div className="mt-6 flex justify-end md:justify-end sm:justify-center">
-                    <Button
-                      type="submit"
-                      onClick={handleSubmit}
-                      className="text-sm bg-stone-900 text-white hover:bg-black px-6 py-2 rounded-md cursor-pointer"
-                      disabled={loading || cooldown > 0}
-                    >
-                      {loading
-                        ? "Generating..."
-                        : cooldown > 0
-                          ? `Please wait ${cooldown}s`
-                          : "Generate Cover Letter"}
-                    </Button>
-                  </div>
-                </div>
+                    Clear resume
+                  </button>
+                )}
+                <Textarea
+                  id="resume"
+                  value={resume}
+                  onChange={(e) => setResume(e.target.value)}
+                  placeholder="Paste your resume here for a more personalized letter..."
+                  className="w-full h-[180px] text-base p-4 rounded-lg border border-stone-300 resize-none"
+                />
+                <p className="text-sm text-stone-500 mt-2">
+                  ✨ This helps the AI tailor your letter using your real
+                  experience.
+                </p>
               </div>
             </form>
+            <div className="mt-6 flex justify-center md:justify-end">
+              <Button
+                type="submit"
+                onClick={handleSubmit}
+                className="text-sm bg-stone-900 text-white hover:bg-black px-6 py-2 rounded-md cursor-pointer"
+                disabled={loading || cooldown > 0}
+              >
+                {loading
+                  ? "Generating..."
+                  : cooldown > 0
+                    ? `Please wait ${cooldown}s`
+                    : "Generate Cover Letter"}
+              </Button>
+            </div>
           </div>
         </section>
 
