@@ -235,10 +235,10 @@ export default function Home() {
                   >
                     Cover Letter:
                   </label>
-                  <div>
+                  <div className="flex flex-col sm:flex-row gap-2 w-full">
                     <select
                       id="length"
-                      className="border border-stone-300 rounded px-2 py-1 bg-white text-stone-700"
+                      className="w-full sm:w-auto border border-stone-300 rounded px-2 py-1 bg-white text-stone-700"
                       value={lengthOption}
                       onChange={(e) => setLengthOption(e.target.value)}
                       title={lengthDescriptions[lengthOption]}
@@ -250,7 +250,7 @@ export default function Home() {
                     </select>
                     <select
                       id="tone"
-                      className="border border-stone-300 rounded ml-3 px-2 py-1 bg-white text-stone-700"
+                      className="w-full sm:w-auto border border-stone-300 rounded ml-3 px-2 py-1 bg-white text-stone-700"
                       value={toneOption}
                       onChange={(e) => setToneOption(e.target.value)}
                       title={toneDescriptions[toneOption]}
