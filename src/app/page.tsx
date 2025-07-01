@@ -319,7 +319,7 @@ export default function Home() {
               <Button
                 type="submit"
                 onClick={handleSubmit}
-                className="text-sm bg-stone-900 text-white hover:bg-black px-6 py-2 rounded-md"
+                className="text-sm bg-stone-900 text-white hover:bg-black px-6 py-2 rounded-md cursor-pointer"
                 disabled={loading || cooldown > 0}
               >
                 {loading
