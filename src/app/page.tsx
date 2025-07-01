@@ -220,10 +220,10 @@ export default function Home() {
                   placeholder="Paste the job description here..."
                   className="w-full h-[180px] text-base p-4 rounded-lg border border-stone-300 resize-none"
                 />
-                {/* <p className="text-sm text-stone-500 mt-2">
+                <p className="text-sm text-stone-500 mt-2">
                   💡 Works great with content pasted from LinkedIn or other job
                   boards.
-                </p> */}
+                </p>
               </div>
 
               {/* Cover Letter Output (spans 2 rows) */}
