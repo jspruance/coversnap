@@ -315,6 +315,20 @@ export default function Home() {
                 </p>
               </div>
             </form>
+            <div className="mt-6 flex justify-end">
+              <Button
+                type="submit"
+                onClick={handleSubmit}
+                className="text-sm bg-stone-900 text-white hover:bg-black px-6 py-2 rounded-md"
+                disabled={loading || cooldown > 0}
+              >
+                {loading
+                  ? "Generating..."
+                  : cooldown > 0
+                    ? `Please wait ${cooldown}s`
+                    : "Generate Cover Letter"}
+              </Button>
+            </div>
           </div>
         </section>
 
@@ -447,20 +461,6 @@ export default function Home() {
                 </p>
               </div>
             ))}
-          </div>
-          <div className="mt-6 flex justify-end">
-            <Button
-              type="submit"
-              onClick={handleSubmit}
-              className="text-sm bg-stone-900 text-white hover:bg-black px-6 py-2 rounded-md"
-              disabled={loading || cooldown > 0}
-            >
-              {loading
-                ? "Generating..."
-                : cooldown > 0
-                  ? `Please wait ${cooldown}s`
-                  : "Generate Cover Letter"}
-            </Button>
           </div>
         </section>
 
