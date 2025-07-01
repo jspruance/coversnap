@@ -193,10 +193,10 @@ export default function Home() {
             className="w-full max-w-6xl bg-white shadow-xl border rounded-xl p-10 space-y-10"
           >
             <div className="text-center">
-              <h2 className="text-5xl font-extrabold text-stone-800 tracking-tight">
-                ✍️ Apply Smarter
-              </h2>
-              <p className="text-stone-600 text-xl mt-4">
+              <h1 className="text-4xl font-extrabold tracking-tight text-stone-800 md:text-5xl">
+                ✍️ Apply <span className="text-pink-500">Smarter</span>
+              </h1>
+              <p className="mt-2 text-lg text-stone-600">
                 Start by pasting the job description below.
               </p>
             </div>
