@@ -217,6 +217,23 @@ export default function Home() {
                     💡 Works great with content pasted from LinkedIn or other
                     job boards.
                   </p>
+                  <label
+                    htmlFor="resume"
+                    className="text-stone-700 font-medium text-lg mt-6"
+                  >
+                    Resume (Optional):
+                  </label>
+                  <Textarea
+                    id="resume"
+                    value={resumeInput}
+                    onChange={(e) => setResumeInput(e.target.value)}
+                    placeholder="Paste your resume here for a more personalized letter..."
+                    className="w-full h-40 text-base p-4 rounded-lg border border-stone-300 resize-none"
+                  />
+                  <p className="text-sm text-stone-500 mt-2">
+                    ✨ This helps the AI tailor your letter using your real
+                    experience.
+                  </p>
                 </div>
 
                 <div className="h-full flex flex-col">
@@ -255,23 +272,6 @@ export default function Home() {
                         <option value="funny">Funny</option>
                       </select>
                     </div>
-                    <label
-                      htmlFor="resume"
-                      className="text-stone-700 font-medium text-lg mt-6"
-                    >
-                      Resume (Optional):
-                    </label>
-                    <Textarea
-                      id="resume"
-                      value={resumeInput}
-                      onChange={(e) => setResumeInput(e.target.value)}
-                      placeholder="Paste your resume here for a more personalized letter..."
-                      className="w-full h-40 text-base p-4 rounded-lg border border-stone-300 resize-none"
-                    />
-                    <p className="text-sm text-stone-500 mt-2">
-                      ✨ This helps the AI tailor your letter using your real
-                      experience.
-                    </p>
                   </div>
 
                   <div
