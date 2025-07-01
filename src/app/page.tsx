@@ -19,7 +19,6 @@ import {
 
 export default function Home() {
   const [inputValue, setInputValue] = useState("");
-  const [resumeInput, setResumeInput] = useState("");
   const [resume, setResume] = useState("");
   const [output, setOutput] = useState("");
   const [loading, setLoading] = useState(false);
@@ -102,7 +101,7 @@ export default function Home() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         input: inputValue.trim(),
-        resume: resumeInput.trim(),
+        resume: resume.trim(),
         length: lengthOption,
         tone: toneOption,
       }),
@@ -242,7 +241,7 @@ export default function Home() {
                   </label>
                   {resume && (
                     <button
-                      onClick={() => handleClearResume}
+                      onClick={handleClearResume}
                       className="text-sm text-stone-400 hover:text-stone-600 underline cursor-pointer"
                     >
                       Clear resume
@@ -251,8 +250,8 @@ export default function Home() {
 
                   <Textarea
                     id="resume"
-                    value={resumeInput}
-                    onChange={(e) => setResumeInput(e.target.value)}
+                    value={resume}
+                    onChange={(e) => setResume(e.target.value)}
                     placeholder="Paste your resume here for a more personalized letter..."
                     className="w-full h-40 text-base p-4 rounded-lg border border-stone-300 resize-none"
                   />
