@@ -206,7 +206,7 @@ export default function Home() {
               className="grid grid-cols-1 md:grid-cols-2 md:grid-rows-2 gap-6 items-start text-left"
             >
               {/* Job Description */}
-              <div className="flex flex-col">
+              <div className="order-1 flex flex-col">
                 <label
                   htmlFor="jobDescription"
                   className="text-stone-700 font-medium text-lg mb-2"
@@ -227,7 +227,7 @@ export default function Home() {
               </div>
 
               {/* Cover Letter Output (spans 2 rows) */}
-              <div className="md:row-span-2 flex flex-col h-full">
+              <div className="order-3 md:row-span-2 flex flex-col h-full">
                 <div className="mb-2 flex justify-between items-center">
                   <label
                     htmlFor="style"
