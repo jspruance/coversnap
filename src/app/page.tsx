@@ -283,21 +283,6 @@ export default function Home() {
                       "Your AI-generated cover letter will appear here."}
                   </p>
                 </div>
-
-                <div className="flex justify-end mt-4 pr-2">
-                  <Button
-                    type="submit"
-                    onClick={handleSubmit}
-                    className="text-sm bg-stone-900 text-white hover:bg-black px-6 py-2 rounded-md"
-                    disabled={loading || cooldown > 0}
-                  >
-                    {loading
-                      ? "Generating..."
-                      : cooldown > 0
-                        ? `Please wait ${cooldown}s`
-                        : "Generate Cover Letter"}
-                  </Button>
-                </div>
               </div>
 
               {/* Resume (bottom left) */}
@@ -462,6 +447,20 @@ export default function Home() {
                 </p>
               </div>
             ))}
+          </div>
+          <div className="mt-6 flex justify-end">
+            <Button
+              type="submit"
+              onClick={handleSubmit}
+              className="text-sm bg-stone-900 text-white hover:bg-black px-6 py-2 rounded-md"
+              disabled={loading || cooldown > 0}
+            >
+              {loading
+                ? "Generating..."
+                : cooldown > 0
+                  ? `Please wait ${cooldown}s`
+                  : "Generate Cover Letter"}
+            </Button>
           </div>
         </section>
 
