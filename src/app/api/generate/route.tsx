@@ -9,7 +9,7 @@ const ipRequests: Record<string, { count: number; lastRequest: number }> = {};
 const RATE_LIMIT = 10; // max 10 requests per hour
 
 export async function POST(req: Request) {
-  const { input, length, tone } = await req.json();
+  const { input, length, tone, resume } = await req.json();
 
   const ip = req.headers.get("x-forwarded-for") || "unknown";
   const now = Date.now();
@@ -94,6 +94,22 @@ export async function POST(req: Request) {
       content: `Here's the job description:\n\n${input}`,
     },
   ];
+
+  // If resume was provided, add it as an additional message
+  if (resume && resume.length > 20) {
+    messages.push({
+      role: "user",
+      content: `
+Here is my resume. Use this to tailor the cover letter to highlight relevant experience, skills, and achievements that match the job description. Emphasize strong fits between my background and the role. Do not copy the resume verbatim — instead, rephrase it naturally within the cover letter.
+
+Resume:
+${resume}`.trim(),
+    });
+  }
+
+  if (resume?.length) {
+    console.log(`Resume included: ${resume.length} characters`);
+  }
 
   // main LLM request
   const completion = await openai.chat.completions.create({

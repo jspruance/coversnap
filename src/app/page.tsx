@@ -19,6 +19,7 @@ import {
 
 export default function Home() {
   const [inputValue, setInputValue] = useState("");
+  const [resumeInput, setResumeInput] = useState("");
   const [output, setOutput] = useState("");
   const [loading, setLoading] = useState(false);
   const [copied, setCopied] = useState(false);
@@ -84,6 +85,7 @@ export default function Home() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         input: inputValue.trim(),
+        resume: resumeInput.trim(),
         length: lengthOption,
         tone: toneOption,
       }),
@@ -253,6 +255,23 @@ export default function Home() {
                         <option value="funny">Funny</option>
                       </select>
                     </div>
+                    <label
+                      htmlFor="resume"
+                      className="text-stone-700 font-medium text-lg mt-6"
+                    >
+                      Resume (Optional):
+                    </label>
+                    <Textarea
+                      id="resume"
+                      value={resumeInput}
+                      onChange={(e) => setResumeInput(e.target.value)}
+                      placeholder="Paste your resume here for a more personalized letter..."
+                      className="w-full h-40 text-base p-4 rounded-lg border border-stone-300 resize-none"
+                    />
+                    <p className="text-sm text-stone-500 mt-2">
+                      ✨ This helps the AI tailor your letter using your real
+                      experience.
+                    </p>
                   </div>
 
                   <div
