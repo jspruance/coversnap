@@ -203,7 +203,7 @@ export default function Home() {
 
             <form
               onSubmit={handleSubmit}
-              className="grid grid-cols-1 md:grid-cols-2 md:grid-rows-2 gap-6 text-left"
+              className="grid grid-cols-1 md:grid-cols-2 md:grid-rows-2 gap-6 items-start text-left"
             >
               {/* Job Description */}
               <div className="flex flex-col">
@@ -218,7 +218,7 @@ export default function Home() {
                   value={inputValue}
                   onChange={(e) => setInputValue(e.target.value)}
                   placeholder="Paste the job description here..."
-                  className="w-full h-[200px] text-base p-4 rounded-lg border border-stone-300 resize-none"
+                  className="w-full h-[180px] text-base p-4 rounded-lg border border-stone-300 resize-none"
                 />
                 <p className="text-sm text-stone-500 mt-2">
                   💡 Works great with content pasted from LinkedIn or other job
@@ -322,7 +322,7 @@ export default function Home() {
                   value={resume}
                   onChange={(e) => setResume(e.target.value)}
                   placeholder="Paste your resume here for a more personalized letter..."
-                  className="w-full h-[200px] text-base p-4 rounded-lg border border-stone-300 resize-none"
+                  className="w-full h-[180px] text-base p-4 rounded-lg border border-stone-300 resize-none"
                 />
                 <p className="text-sm text-stone-500 mt-2">
                   ✨ This helps the AI tailor your letter using your real
