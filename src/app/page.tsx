@@ -284,7 +284,7 @@ export default function Home() {
                   </p>
                 </div>
 
-                <div className="mt-6 flex justify-end">
+                <div className="flex justify-end mt-4 pr-2">
                   <Button
                     type="submit"
                     onClick={handleSubmit}
