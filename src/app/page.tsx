@@ -20,7 +20,6 @@ import {
 export default function Home() {
   const [inputValue, setInputValue] = useState("");
   const [resumeInput, setResumeInput] = useState("");
-  const [resumeText, setResumeText] = useState("");
   const [resume, setResume] = useState("");
   const [output, setOutput] = useState("");
   const [loading, setLoading] = useState(false);
@@ -241,9 +240,9 @@ export default function Home() {
                   >
                     Resume (Optional):
                   </label>
-                  {resumeText && (
+                  {resume && (
                     <button
-                      onClick={() => setResumeText("")}
+                      onClick={() => handleClearResume}
                       className="text-sm text-stone-400 hover:text-stone-600 underline cursor-pointer"
                     >
                       Clear resume
