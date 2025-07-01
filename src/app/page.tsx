@@ -467,7 +467,7 @@ export default function Home() {
           id="pricing"
           className="bg-white border-t py-24 px-4 text-center"
         >
-          <div id="pricing" className="pt-12 text-center">
+          <div id="pricing" className="text-center">
             <h2 className="text-2xl font-bold mb-4 text-stone-800">
               Simple, Fair Pricing
             </h2>
