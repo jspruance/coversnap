@@ -463,7 +463,10 @@ export default function Home() {
             ))}
           </div>
         </section>
-        <section id="pricing" className="bg-white border-t px-4 text-center">
+        <section
+          id="pricing"
+          className="bg-white border-t py-24 px-4 text-center"
+        >
           <div id="pricing" className="mt-16 pt-12 text-center">
             <h2 className="text-2xl font-bold mb-4 text-stone-800">
               Simple, Fair Pricing
