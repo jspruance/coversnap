@@ -252,6 +252,12 @@ export default function Home() {
                     ✨ This helps the AI tailor your letter using your real
                     experience.
                   </p>
+                  <button
+                    onClick={handleClearResume}
+                    className="text-sm text-red-500"
+                  >
+                    Clear Resume
+                  </button>
                 </div>
 
                 <div className="h-full flex flex-col">
