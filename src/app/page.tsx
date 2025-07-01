@@ -20,6 +20,7 @@ import {
 export default function Home() {
   const [inputValue, setInputValue] = useState("");
   const [resumeInput, setResumeInput] = useState("");
+  const [resume, setResume] = useState("");
   const [output, setOutput] = useState("");
   const [loading, setLoading] = useState(false);
   const [copied, setCopied] = useState(false);
@@ -63,6 +64,22 @@ export default function Home() {
     }
     return () => clearTimeout(timer);
   }, [cooldown]);
+
+  // Load from localStorage on mount
+  useEffect(() => {
+    const saved = localStorage.getItem("coversnap_resume");
+    if (saved) setResume(saved);
+  }, []);
+
+  // Save to localStorage on change
+  useEffect(() => {
+    localStorage.setItem("coversnap_resume", resume);
+  }, [resume]);
+
+  const handleClearResume = () => {
+    setResume("");
+    localStorage.removeItem("coversnap_resume");
+  };
 
   const handleSubmit = async (
     e: React.FormEvent<HTMLFormElement> | React.MouseEvent<HTMLButtonElement>
@@ -223,6 +240,7 @@ export default function Home() {
                   >
                     Resume (Optional):
                   </label>
+
                   <Textarea
                     id="resume"
                     value={resumeInput}
