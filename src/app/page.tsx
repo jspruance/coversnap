@@ -248,13 +248,15 @@ export default function Home() {
                     </button>
                   )}
 
-                  <Textarea
-                    id="resume"
-                    value={resume}
-                    onChange={(e) => setResume(e.target.value)}
-                    placeholder="Paste your resume here for a more personalized letter..."
-                    className="w-full h-40 text-base p-4 rounded-lg border border-stone-300 resize-none"
-                  />
+                  <div className="h-[250px] overflow-y-auto mt-2">
+                    <Textarea
+                      id="resume"
+                      value={resume}
+                      onChange={(e) => setResume(e.target.value)}
+                      placeholder="Paste your resume here for a more personalized letter..."
+                      className="w-full h-full text-base p-4 rounded-lg border border-stone-300 resize-none"
+                    />
+                  </div>
                   <p className="text-sm text-stone-500 mt-2">
                     ✨ This helps the AI tailor your letter using your real
                     experience.
