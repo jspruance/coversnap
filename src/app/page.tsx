@@ -20,6 +20,7 @@ import {
 export default function Home() {
   const [inputValue, setInputValue] = useState("");
   const [resumeInput, setResumeInput] = useState("");
+  const [resumeText, setResumeText] = useState("");
   const [resume, setResume] = useState("");
   const [output, setOutput] = useState("");
   const [loading, setLoading] = useState(false);
@@ -240,6 +241,14 @@ export default function Home() {
                   >
                     Resume (Optional):
                   </label>
+                  {resumeText && (
+                    <button
+                      onClick={() => setResumeText("")}
+                      className="text-sm text-stone-400 hover:text-stone-600 underline cursor-pointer"
+                    >
+                      Clear resume
+                    </button>
+                  )}
 
                   <Textarea
                     id="resume"
@@ -252,12 +261,6 @@ export default function Home() {
                     ✨ This helps the AI tailor your letter using your real
                     experience.
                   </p>
-                  <button
-                    onClick={handleClearResume}
-                    className="text-sm text-red-500"
-                  >
-                    Clear Resume
-                  </button>
                 </div>
 
                 <div className="h-full flex flex-col">
