@@ -399,7 +399,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="bg-white py-24 px-4">
+        <section className="bg-white  py-20 px-4">
           <h3 className="text-2xl font-semibold text-center text-stone-700 mb-12">
             What people are saying
           </h3>
@@ -463,7 +463,27 @@ export default function Home() {
             ))}
           </div>
         </section>
-
+        <section id="pricing" className="bg-white py-24 px-4 text-center">
+          <div id="pricing" className="mt-16 border-t pt-12 text-center">
+            <h2 className="text-2xl font-bold mb-4 text-stone-800">
+              Simple, Fair Pricing
+            </h2>
+            <p className="text-stone-600 mb-6">
+              Get unlimited lifetime access for a one-time payment.
+            </p>
+            <div className="inline-block border rounded-xl shadow-sm p-6 bg-pink-50">
+              <div className="text-4xl font-extrabold text-pink-600 mb-2">
+                $5
+              </div>
+              <p className="text-stone-700 mb-4">Lifetime unlock</p>
+              <ul className="text-sm text-stone-600 space-y-2 text-left">
+                <li>✅ Unlimited cover letters</li>
+                <li>✅ Resume-based personalization</li>
+                <li>✅ Future features included</li>
+              </ul>
+            </div>
+          </div>
+        </section>
         <section id="contact" className="text-center mt-16 px-4">
           <h3 className="text-lg font-semibold text-stone-700 mb-4">
             Contact Us
