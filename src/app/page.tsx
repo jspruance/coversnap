@@ -235,7 +235,7 @@ export default function Home() {
                   >
                     Cover Letter:
                   </label>
-                  <div className="flex flex-col sm:flex-row gap-2 w-full">
+                  <div className="w-full sm:w-auto flex flex-col sm:flex-row gap-2 w-full">
                     <select
                       id="length"
                       className="w-full sm:w-auto border border-stone-300 rounded px-2 py-1 bg-white text-stone-700"
