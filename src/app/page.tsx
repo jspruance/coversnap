@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect } from "react";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 import { Copy } from "lucide-react";
 import Head from "next/head";
 import Image from "next/image";
@@ -218,12 +219,14 @@ export default function Home() {
             <a href="#pricing" className="hover:text-stone-700 cursor-pointer">
               Pricing
             </a>
-            <a href="/blog" className="hover:text-stone-700 cursor-pointer">
-              Blog
-            </a>
-            <a href="#contact" className="hover:text-stone-700 cursor-pointer">
-              Contact
-            </a>
+            <Link href="/blog">
+              <a
+                href="#contact"
+                className="hover:text-stone-700 cursor-pointer"
+              >
+                Contact
+              </a>
+            </Link>
           </nav>
         </header>
 
