@@ -3,7 +3,13 @@
 import { blogPosts } from "../posts";
 import { notFound } from "next/navigation";
 
-export default function BlogPostPage({ params }: { params: { slug: string } }) {
+type BlogPostPageProps = {
+  params: {
+    slug: string;
+  };
+};
+
+export default function BlogPostPage({ params }: BlogPostPageProps) {
   const post = blogPosts.find((p) => p.slug === params.slug);
   if (!post) return notFound();
 
@@ -21,7 +27,6 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
 
 // Helper function to render markdown (for now, just naive conversion)
 function convertMarkdown(markdown: string) {
-  // You can install and use `marked`, `remark`, or `markdown-it` for better parsing
   return markdown
     .replace(/^### (.*$)/gim, "<h3>$1</h3>")
     .replace(/^## (.*$)/gim, "<h2>$1</h2>")
