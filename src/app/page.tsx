@@ -214,7 +214,13 @@ export default function Home() {
             width={199}
             height={44}
           />
-          <nav className="text-stone-500 text-sm">
+          <nav className="text-stone-500 text-sm space-x-6">
+            <a href="#pricing" className="hover:text-stone-700 cursor-pointer">
+              Pricing
+            </a>
+            <a href="/blog" className="hover:text-stone-700 cursor-pointer">
+              Blog
+            </a>
             <a href="#contact" className="hover:text-stone-700 cursor-pointer">
               Contact
             </a>
