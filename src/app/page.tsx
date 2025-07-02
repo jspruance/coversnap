@@ -164,11 +164,45 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>CoverSnap – AI-Powered Cover Letters</title>
+        <title>CoverSnap | AI Cover Letter Generator – Free & Instant</title>
         <meta
           name="description"
-          content="Generate personalized, professional cover letters in seconds with AI. Paste the job description and get started instantly."
+          content="CoverSnap helps you generate personalized, professional cover letters in seconds using AI. Paste the job description and get started instantly – no signup required."
         />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+        {/* Open Graph for Facebook/LinkedIn */}
+        <meta
+          property="og:title"
+          content="CoverSnap | AI Cover Letter Generator"
+        />
+        <meta
+          property="og:description"
+          content="Create a custom, job-winning cover letter in seconds using AI. Try it free – no signup needed."
+        />
+        <meta
+          property="og:image"
+          content="https://coversnap.app/og-image.png"
+        />
+        <meta property="og:url" content="https://coversnap.app/" />
+        <meta property="og:type" content="website" />
+
+        {/* Twitter Card */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta
+          name="twitter:title"
+          content="CoverSnap | AI Cover Letter Generator"
+        />
+        <meta
+          name="twitter:description"
+          content="Generate AI-powered, professional cover letters instantly. Free to try, no login required."
+        />
+        <meta
+          name="twitter:image"
+          content="https://coversnap.app/og-image.png"
+        />
+
+        {/* Favicon */}
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
