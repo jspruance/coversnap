@@ -178,8 +178,8 @@ export default function Home() {
           property="og:description"
           content="Generate personalized cover letters instantly with AI. Free to try – no signup required."
         />
-        <meta property="og:image" content="https://coversnap.app/og-image.png" />
-        <meta property="og:url" content="https://coversnap.app/" />
+        <meta property="og:image" content="https://coversnapapp.com/og-image.png" />
+        <meta property="og:url" content="https://coversnapapp.com/" />
         <meta property="og:type" content="website" />
 
         {/* Twitter Card */}
@@ -189,7 +189,7 @@ export default function Home() {
           name="twitter:description"
           content="Create AI-powered cover letters in seconds. Free, fast, and no login needed."
         />
-        <meta name="twitter:image" content="https://coversnap.app/og-image.png" />
+        <meta name="twitter:image" content="https://coversnapapp.com/og-image.png" />
 
         {/* Favicon */}
         <link rel="icon" href="/favicon.ico" />
