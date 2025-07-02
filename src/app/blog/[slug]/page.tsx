@@ -25,7 +25,7 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
   );
 }
 
-// Helper function to render markdown (for now, just naive conversion)
+// Helper function to render markdown (basic inline conversion)
 function convertMarkdown(markdown: string) {
   return markdown
     .replace(/^### (.*$)/gim, "<h3>$1</h3>")
