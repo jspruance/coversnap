@@ -168,44 +168,33 @@ export default function Home() {
         <title>CoverSnap | AI Cover Letter Generator – Free & Instant</title>
         <meta
           name="description"
-          content="CoverSnap helps you generate personalized, professional cover letters in seconds using AI. Paste the job description and get started instantly – no signup required."
+          content="Generate personalized, professional cover letters in seconds using AI. No signup needed – just paste the job description and go."
         />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
 
         {/* Open Graph for Facebook/LinkedIn */}
-        <meta
-          property="og:title"
-          content="CoverSnap | AI Cover Letter Generator"
-        />
+        <meta property="og:title" content="CoverSnap | AI Cover Letter Generator" />
         <meta
           property="og:description"
-          content="Create a custom, job-winning cover letter in seconds using AI. Try it free – no signup needed."
+          content="Generate personalized cover letters instantly with AI. Free to try – no signup required."
         />
-        <meta
-          property="og:image"
-          content="https://coversnap.app/og-image.png"
-        />
+        <meta property="og:image" content="https://coversnap.app/og-image.png" />
         <meta property="og:url" content="https://coversnap.app/" />
         <meta property="og:type" content="website" />
 
         {/* Twitter Card */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta
-          name="twitter:title"
-          content="CoverSnap | AI Cover Letter Generator"
-        />
+        <meta name="twitter:title" content="CoverSnap | AI Cover Letter Generator" />
         <meta
           name="twitter:description"
-          content="Generate AI-powered, professional cover letters instantly. Free to try, no login required."
+          content="Create AI-powered cover letters in seconds. Free, fast, and no login needed."
         />
-        <meta
-          name="twitter:image"
-          content="https://coversnap.app/og-image.png"
-        />
+        <meta name="twitter:image" content="https://coversnap.app/og-image.png" />
 
         {/* Favicon */}
         <link rel="icon" href="/favicon.ico" />
       </Head>
+
 
       <main className="min-h-screen bg-gradient-to-b from-white via-stone-50 to-stone-100 px-0 relative overflow-hidden">
         <header className="sticky top-0 z-20 backdrop-blur bg-transparent w-full flex justify-between items-center py-4 px-4 max-w-6xl mx-auto">
