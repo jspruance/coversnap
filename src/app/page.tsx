@@ -219,14 +219,12 @@ export default function Home() {
             <a href="#pricing" className="hover:text-stone-700 cursor-pointer">
               Pricing
             </a>
-            <Link href="/blog">
-              <a
-                href="#contact"
-                className="hover:text-stone-700 cursor-pointer"
-              >
-                Contact
-              </a>
+            <Link href="/blog" className="hover:text-stone-700 cursor-pointer">
+              Blog
             </Link>
+            <a href="#contact" className="hover:text-stone-700 cursor-pointer">
+              Contact
+            </a>
           </nav>
         </header>
 
