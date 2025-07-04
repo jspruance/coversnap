@@ -40,11 +40,11 @@ Keep it concise. No need to restate your entire resume.
 
 ## 🤖 What If You Hate Writing?
 
-Good news: tools like **[CoverSnap](https://coversnap.app)** let you generate a custom cover letter in seconds.
+Good news: tools like **[CoverSnap](https://coversnapapp.com)** let you generate a custom cover letter in seconds.
 
 Just paste the job description, optionally add your resume, and pick the tone — the AI does the rest. It’s fast, polished, and free to try.
 
-> Try it out: [Generate your cover letter now →](https://coversnap.app)
+> Try it out: [Generate your cover letter now →](https://coversnapapp.com)
 
 ---
 
@@ -57,7 +57,7 @@ Just paste the job description, optionally add your resume, and pick the tone �
 ---
 
 Need your next cover letter? Let AI do the heavy lifting.  
-[Generate yours with CoverSnap →](https://coversnap.app)
+[Generate yours with CoverSnap →](https://coversnapapp.com)
     `,
   },
   {
@@ -99,7 +99,7 @@ If you lack job experience, focus on:
 
 ## 🤖 Use AI to Fill the Gaps
 
-Not sure how to phrase your strengths? Tools like **[CoverSnap](https://coversnap.app)** can help you:
+Not sure how to phrase your strengths? Tools like **[CoverSnap](https://coversnapapp.com)** can help you:
 
 - Turn basic info into polished language  
 - Sound confident without exaggerating  
@@ -107,7 +107,7 @@ Not sure how to phrase your strengths? Tools like **[CoverSnap](https://coversna
 
 Just paste the job, choose your tone, and you’re done in seconds.
 
-> Try it here: [Generate your cover letter →](https://coversnap.app)
+> Try it here: [Generate your cover letter →](https://coversnapapp.com)
 
 ---
 
@@ -120,7 +120,7 @@ Just paste the job, choose your tone, and you’re done in seconds.
 ---
 
 AI can’t get the job for you — but it can make your first impression stronger.  
-[Generate your first cover letter with CoverSnap →](https://coversnap.app)
+[Generate your first cover letter with CoverSnap →](https://coversnapapp.com)
     `,
   },
   {
@@ -140,7 +140,7 @@ If you're tired of staring at a blank page, you're not alone. We tested the best
 
 ## 🏆 1. CoverSnap — Best for Speed and Simplicity
 
-**URL:** [https://coversnap.app](https://coversnap.app)  
+**URL:** [https://coversnapapp.com](https://coversnapapp.com)  
 **Pros:** No signup, fast, clean UI, free to try  
 **Cons:** Limited customization (unless upgraded)  
 **Best for:** Anyone who wants a letter *right now*
@@ -189,7 +189,7 @@ If you're tired of staring at a blank page, you're not alone. We tested the best
 
 If you just want to get the letter done — without signing up, filling out 10 forms, or messing with formatting — **CoverSnap is the easiest tool we tested**.
 
-> Try it free: [https://coversnap.app](https://coversnap.app)
+> Try it free: [https://coversnapapp.com](https://coversnapapp.com)
 
 It’s fast, clean, and surprisingly good.
     `,
@@ -235,7 +235,7 @@ Employers want to know:
 
 CoverSnap can generate a remote-ready cover letter in seconds — just paste the job description, and it highlights remote-readiness, tone, and structure automatically.
 
-> Try it now: [Generate my remote cover letter →](https://coversnap.app)
+> Try it now: [Generate my remote cover letter →](https://coversnapapp.com)
 
 ---
 
@@ -249,7 +249,7 @@ CoverSnap can generate a remote-ready cover letter in seconds — just paste the
 
 Working remotely starts with writing well — and your cover letter is step one.  
 Let AI help you sound confident, clear, and remote-ready.  
-[Write yours with CoverSnap →](https://coversnap.app)
+[Write yours with CoverSnap →](https://coversnapapp.com)
     `,
   }
 ];
