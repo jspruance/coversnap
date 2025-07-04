@@ -1,3 +1,4 @@
+// File: src/app/interview/page.tsx
 "use client";
 
 import React, { useState } from "react";
@@ -27,7 +28,7 @@ export default function InterviewQuestionGenerator() {
   };
 
   return (
-    <React.Fragment>
+    <>
       <Header />
       <main className="min-h-screen bg-gradient-to-b from-white via-stone-50 to-stone-100 px-4 py-20">
         <section className="w-full max-w-6xl bg-white shadow-xl border rounded-xl p-10 space-y-10 mx-auto">
@@ -36,8 +37,7 @@ export default function InterviewQuestionGenerator() {
             Generator
           </h1>
           <p className="text-stone-600 text-center mb-8">
-            Paste the job description below to generate realistic questions and
-            sample answers.
+            Paste the job description below to generate realistic questions and sample answers.
           </p>
 
           <Textarea
@@ -59,12 +59,12 @@ export default function InterviewQuestionGenerator() {
             <div className="relative w-full bg-stone-50 border border-stone-200 p-8 rounded-xl shadow-sm prose prose-stone">
               {output ? (
                 output
-                  .split(/###\s*Question:/)
+                  .split(/\*\*Question:\*\*/)
                   .filter(Boolean)
                   .map((section, i) => {
-                    const [question, ...rest] =
-                      section.split(/\*\*Answer:\*\*/);
+                    const [question, ...rest] = section.split(/\*\*Answer:\*\*/);
                     const answer = rest.join("**Answer:**").trim();
+
                     return (
                       <div
                         key={i}
@@ -91,6 +91,6 @@ export default function InterviewQuestionGenerator() {
           )}
         </section>
       </main>
-    </React.Fragment>
+    </>
   );
 }
