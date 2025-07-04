@@ -21,18 +21,22 @@ export default function Header() {
             AI Cover Letter
           </Link>
           <Link href="/resume" className="hover:text-stone-700">
-            AI Resume Enhancer
+            AI Resume Rewriter
+          </Link>
+          <Link href="/interview" className="hover:text-stone-700">
+            AI Interview Question Generator
           </Link>
           <Link href="/blog" className="hover:text-stone-700">
             Blog
           </Link>
-          <Link href="/#pricing" className="hover:text-stone-700">
+          <a href="#pricing" className="hover:text-stone-700">
             Pricing
-          </Link>
-          <Link href="/#contact" className="hover:text-stone-700">
+          </a>
+          <a href="#contact" className="hover:text-stone-700">
             Contact
-          </Link>
+          </a>
         </nav>
+
       </div>
     </header>
   );

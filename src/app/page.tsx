@@ -29,7 +29,6 @@ export default function Home() {
   const [showPaywall, setShowPaywall] = useState(false);
   const [email, setEmail] = useState("");
   const resultRef = useRef<HTMLDivElement>(null);
-  const formRef = useRef<HTMLDivElement>(null);
 
   // social media share info
   const shareUrl = "https://coversnapapp.com";
