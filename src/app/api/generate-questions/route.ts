@@ -40,6 +40,8 @@ Important:
 - Do not use headers, bullets, or numbers.
 `;
 
+
+
   const completion = await openai.chat.completions.create({
     model: "gpt-4o",
     messages: [{ role: "user", content: prompt }],
