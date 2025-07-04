@@ -216,10 +216,12 @@ export default function Home() {
           >
             <div className="text-center">
               <h1 className="text-4xl font-extrabold tracking-tight text-stone-800 md:text-5xl">
-                ✍️ Apply <span className="text-pink-500">Smarter</span>
+                ✍️ AI <span className="text-pink-500">Cover Letter</span>{" "}
+                Generator
               </h1>
               <p className="mt-2 text-lg text-stone-600">
-                Start by pasting the job description below.
+                Instantly generate tailored cover letters from any job
+                description.
               </p>
             </div>
 

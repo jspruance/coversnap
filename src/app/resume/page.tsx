@@ -45,7 +45,7 @@ export default function ResumeRewriter() {
     <>
       <Header />
       <main className="min-h-screen bg-white py-20 px-4 max-w-4xl mx-auto">
-        <h1 className="text-3xl font-bold text-stone-800 mb-6 text-center">
+        <h1 className="text-4xl font-bold text-stone-800 mb-6 text-center">
           ✨ AI Resume Rewriter
         </h1>
 
