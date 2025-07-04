@@ -3,10 +3,8 @@
 import { useState, useRef, useEffect } from "react";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
-import Link from "next/link";
 import { Copy } from "lucide-react";
 import Head from "next/head";
-import Image from "next/image";
 import {
   LinkedinShareButton,
   TwitterShareButton,
@@ -17,6 +15,7 @@ import {
   RedditIcon,
   EmailIcon,
 } from "react-share";
+import Header from "@/components/Header";
 
 export default function Home() {
   const [inputValue, setInputValue] = useState("");
@@ -173,49 +172,42 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
 
         {/* Open Graph for Facebook/LinkedIn */}
-        <meta property="og:title" content="CoverSnap | AI Cover Letter Generator" />
+        <meta
+          property="og:title"
+          content="CoverSnap | AI Cover Letter Generator"
+        />
         <meta
           property="og:description"
           content="Generate personalized cover letters instantly with AI. Free to try – no signup required."
         />
-        <meta property="og:image" content="https://coversnapapp.com/og-image.png" />
+        <meta
+          property="og:image"
+          content="https://coversnapapp.com/og-image.png"
+        />
         <meta property="og:url" content="https://coversnapapp.com/" />
         <meta property="og:type" content="website" />
 
         {/* Twitter Card */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="CoverSnap | AI Cover Letter Generator" />
+        <meta
+          name="twitter:title"
+          content="CoverSnap | AI Cover Letter Generator"
+        />
         <meta
           name="twitter:description"
           content="Create AI-powered cover letters in seconds. Free, fast, and no login needed."
         />
-        <meta name="twitter:image" content="https://coversnapapp.com/og-image.png" />
+        <meta
+          name="twitter:image"
+          content="https://coversnapapp.com/og-image.png"
+        />
 
         {/* Favicon */}
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-
       <main className="min-h-screen bg-gradient-to-b from-white via-stone-50 to-stone-100 px-0 relative overflow-hidden">
-        <header className="sticky top-0 z-20 backdrop-blur bg-transparent w-full flex justify-between items-center py-4 px-4 max-w-6xl mx-auto">
-          <Image
-            src="/logos/coversnap-logo-44h.png"
-            alt="CoverSnap Logo"
-            width={199}
-            height={44}
-          />
-          <nav className="text-stone-500 text-sm space-x-6">
-            <a href="#pricing" className="hover:text-stone-700 cursor-pointer">
-              Pricing
-            </a>
-            <Link href="/blog" className="hover:text-stone-700 cursor-pointer">
-              Blog
-            </Link>
-            <a href="#contact" className="hover:text-stone-700 cursor-pointer">
-              Contact
-            </a>
-          </nav>
-        </header>
+        <Header />
 
         <section className="flex flex-col items-center justify-center text-center py-12 px-4 z-10 relative">
           <div

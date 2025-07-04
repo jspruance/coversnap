@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect } from "react";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 import { Copy } from "lucide-react";
 import Head from "next/head";
 import Image from "next/image";
@@ -164,11 +165,45 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>CoverSnap – AI-Powered Cover Letters</title>
+        <title>CoverSnap | AI Cover Letter Generator – Free & Instant</title>
         <meta
           name="description"
-          content="Generate personalized, professional cover letters in seconds with AI. Paste the job description and get started instantly."
+          content="Generate personalized, professional cover letters in seconds using AI. No signup needed – just paste the job description and go."
         />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+        {/* Open Graph for Facebook/LinkedIn */}
+        <meta
+          property="og:title"
+          content="CoverSnap | AI Cover Letter Generator"
+        />
+        <meta
+          property="og:description"
+          content="Generate personalized cover letters instantly with AI. Free to try – no signup required."
+        />
+        <meta
+          property="og:image"
+          content="https://coversnapapp.com/og-image.png"
+        />
+        <meta property="og:url" content="https://coversnapapp.com/" />
+        <meta property="og:type" content="website" />
+
+        {/* Twitter Card */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta
+          name="twitter:title"
+          content="CoverSnap | AI Cover Letter Generator"
+        />
+        <meta
+          name="twitter:description"
+          content="Create AI-powered cover letters in seconds. Free, fast, and no login needed."
+        />
+        <meta
+          name="twitter:image"
+          content="https://coversnapapp.com/og-image.png"
+        />
+
+        {/* Favicon */}
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
@@ -180,7 +215,13 @@ export default function Home() {
             width={199}
             height={44}
           />
-          <nav className="text-stone-500 text-sm">
+          <nav className="text-stone-500 text-sm space-x-6">
+            <a href="#pricing" className="hover:text-stone-700 cursor-pointer">
+              Pricing
+            </a>
+            <Link href="/blog" className="hover:text-stone-700 cursor-pointer">
+              Blog
+            </Link>
             <a href="#contact" className="hover:text-stone-700 cursor-pointer">
               Contact
             </a>
@@ -193,10 +234,10 @@ export default function Home() {
             className="w-full max-w-6xl bg-white shadow-xl border rounded-xl p-10 space-y-10"
           >
             <div className="text-center">
-              <h2 className="text-5xl font-extrabold text-stone-800 tracking-tight">
-                ✍️ Apply Smarter
-              </h2>
-              <p className="text-stone-600 text-xl mt-4">
+              <h1 className="text-4xl font-extrabold tracking-tight text-stone-800 md:text-5xl">
+                ✍️ Apply <span className="text-pink-500">Smarter</span>
+              </h1>
+              <p className="mt-2 text-lg text-stone-600">
                 Start by pasting the job description below.
               </p>
             </div>
@@ -399,7 +440,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="bg-white py-24 px-4">
+        <section className="bg-white  py-20 px-4">
           <h3 className="text-2xl font-semibold text-center text-stone-700 mb-12">
             What people are saying
           </h3>
@@ -463,7 +504,30 @@ export default function Home() {
             ))}
           </div>
         </section>
-
+        <section
+          id="pricing"
+          className="bg-white border-t py-24 px-4 text-center"
+        >
+          <div id="pricing" className="text-center">
+            <h2 className="text-2xl font-bold mb-4 text-stone-800">
+              Simple, Fair Pricing
+            </h2>
+            <p className="text-stone-600 mb-6">
+              Get unlimited lifetime access for a one-time payment.
+            </p>
+            <div className="inline-block border rounded-xl shadow-sm p-6 bg-pink-50">
+              <div className="text-4xl font-extrabold text-pink-600 mb-2">
+                $5
+              </div>
+              <p className="text-stone-700 mb-4">Lifetime unlock</p>
+              <ul className="text-sm text-stone-600 space-y-2 text-left">
+                <li>✅ Unlimited cover letters</li>
+                <li>✅ Resume-based personalization</li>
+                <li>✅ Future features included</li>
+              </ul>
+            </div>
+          </div>
+        </section>
         <section id="contact" className="text-center mt-16 px-4">
           <h3 className="text-lg font-semibold text-stone-700 mb-4">
             Contact Us
