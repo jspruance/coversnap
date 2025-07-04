@@ -30,6 +30,8 @@ export default function Home() {
   const [email, setEmail] = useState("");
   const resultRef = useRef<HTMLDivElement>(null);
 
+
+
   // social media share info
   const shareUrl = "https://coversnapapp.com";
   const title = "Check out CoverSnap — AI cover letter generator";
@@ -83,6 +85,14 @@ export default function Home() {
   const handleClearResume = () => {
     setResume("");
     localStorage.removeItem("coversnap_resume");
+  };
+
+  const handleReset = () => {
+    setInputValue("");
+    setResume("");
+    setOutput("");
+    setCooldown(0);
+    setShowPaywall(false);
   };
 
   const handleSubmit = async (
@@ -351,6 +361,14 @@ export default function Home() {
                   {output || "Your AI-generated cover letter will appear here."}
                 </p>
               </div>
+              {output && (
+                <button
+                  onClick={handleReset}
+                  className="text-sm text-pink-600 hover:underline mt-4 cursor-pointer"
+                >
+                  Start over
+                </button>
+              )}
             </form>
           </div>
         </section>
