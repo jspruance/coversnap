@@ -16,25 +16,15 @@ ${jobDescription}
 """
 
 Instructions:
-- Generate 8–10 behavioral or scenario-based questions.
-- Generate 8–10 technical questions targeting specific frameworks, languages, and tools mentioned.
+- Include ~8 behavioral/scenario-based questions.
+- Include ~8 technical questions targeting specific languages, frameworks, and tools mentioned.
 - For each question:
   - Start with a line that begins with: **Question:** followed by the question.
   - Then a blank line.
   - Then a line that begins with: **Answer:** followed by the sample answer.
   - Then a blank line before the next question.
-- DO NOT combine questions and answers in one paragraph.
-- DO NOT include extra formatting like numbers, bullets, or headers.
-- DO NOT prepend questions with “###” or any markdown heading.
-- Maintain clear spacing and structure for each Q&A block.
-
-Example:
-
-**Question:** How do you approach debugging a Node.js application?
-
-**Answer:** I begin by replicating the issue locally using...
-
-Only output questions and answers in this format. No extra commentary.
+- Do NOT use bullets, numbers, or markdown headers.
+- Keep formatting very clean and minimal. Only questions and answers as described.
 `;
 
   const completion = await openai.chat.completions.create({
@@ -45,11 +35,12 @@ Only output questions and answers in this format. No extra commentary.
 
   let raw = completion.choices[0].message.content || "";
 
-  // ✅ Post-process: Ensure consistent spacing
+  // ✅ Enforce clean formatting
   raw = raw
-    .replace(/\*\*Question:\*\*/g, "### Question:")
-    .replace(/\*\*Answer:\*\*/g, "**Answer:**")
-    .replace(/\n{2,}/g, "\n\n") // Collapse excessive newlines
+    .replace(/###\s*Question:/g, '**Question:**') // strip rogue headers
+    .replace(/\*\*Question:\*\*/g, '\n\n**Question:**') // ensure newline before
+    .replace(/\*\*Answer:\*\*/g, '\n\n**Answer:**') // ensure newline before
+    .replace(/\n{3,}/g, '\n\n') // collapse extra spacing
     .trim();
 
   return NextResponse.json({ result: raw });
