@@ -21,7 +21,7 @@ export default function Header() {
             AI Cover Letter
           </Link>
           <Link href="/resume" className="hover:text-stone-700">
-            AI Resume Rewriter
+            AI Resume Enhancer
           </Link>
           <Link href="/blog" className="hover:text-stone-700">
             Blog

@@ -3,10 +3,8 @@
 import { useState, useRef, useEffect } from "react";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
-import Link from "next/link";
 import { Copy } from "lucide-react";
 import Head from "next/head";
-import Image from "next/image";
 import {
   LinkedinShareButton,
   TwitterShareButton,
@@ -17,6 +15,7 @@ import {
   RedditIcon,
   EmailIcon,
 } from "react-share";
+import Header from "@/components/Header";
 
 export default function Home() {
   const [inputValue, setInputValue] = useState("");
@@ -208,25 +207,7 @@ export default function Home() {
       </Head>
 
       <main className="min-h-screen bg-gradient-to-b from-white via-stone-50 to-stone-100 px-0 relative overflow-hidden">
-        <header className="sticky top-0 z-20 backdrop-blur bg-transparent w-full flex justify-between items-center py-4 px-4 max-w-6xl mx-auto">
-          <Image
-            src="/logos/coversnap-logo-44h.png"
-            alt="CoverSnap Logo"
-            width={199}
-            height={44}
-          />
-          <nav className="text-stone-500 text-sm space-x-6">
-            <a href="#pricing" className="hover:text-stone-700 cursor-pointer">
-              Pricing
-            </a>
-            <Link href="/blog" className="hover:text-stone-700 cursor-pointer">
-              Blog
-            </Link>
-            <a href="#contact" className="hover:text-stone-700 cursor-pointer">
-              Contact
-            </a>
-          </nav>
-        </header>
+        <Header />
 
         <section className="flex flex-col items-center justify-center text-center py-12 px-4 z-10 relative">
           <div
@@ -235,10 +216,12 @@ export default function Home() {
           >
             <div className="text-center">
               <h1 className="text-4xl font-extrabold tracking-tight text-stone-800 md:text-5xl">
-                ✍️ Apply <span className="text-pink-500">Smarter</span>
+                ✍️ AI <span className="text-pink-500">Cover Letter</span>{" "}
+                Generator
               </h1>
               <p className="mt-2 text-lg text-stone-600">
-                Start by pasting the job description below.
+                Instantly generate tailored cover letters from any job
+                description.
               </p>
             </div>
 

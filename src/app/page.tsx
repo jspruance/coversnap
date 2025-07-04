@@ -210,10 +210,7 @@ export default function Home() {
         <Header />
 
         <section className="flex flex-col items-center justify-center text-center py-12 px-4 z-10 relative">
-          <div
-            ref={formRef}
-            className="w-full max-w-6xl bg-white shadow-xl border rounded-xl p-10 space-y-10"
-          >
+          <div className="w-full max-w-6xl bg-white shadow-xl border rounded-xl p-10 space-y-10">
             <div className="text-center">
               <h1 className="text-4xl font-extrabold tracking-tight text-stone-800 md:text-5xl">
                 ✍️ AI <span className="text-pink-500">Cover Letter</span>{" "}
@@ -225,15 +222,12 @@ export default function Home() {
               </p>
             </div>
 
-            <form
-              onSubmit={handleSubmit}
-              className="grid grid-cols-1 md:grid-cols-2 md:grid-rows-2 gap-6 items-start text-left"
-            >
+            <form onSubmit={handleSubmit} className="space-y-6 text-left">
               {/* Job Description */}
-              <div className="flex flex-col">
+              <div>
                 <label
                   htmlFor="jobDescription"
-                  className="text-stone-700 font-medium text-lg mb-2"
+                  className="text-stone-700 font-medium text-lg mb-2 block"
                 >
                   Job Description:
                 </label>
@@ -250,70 +244,11 @@ export default function Home() {
                 </p>
               </div>
 
-              {/* Cover Letter Output (spans 2 rows) */}
-              <div className="md:row-span-2 flex flex-col h-full">
-                <div className="mb-2 flex justify-between items-center">
-                  <label
-                    htmlFor="style"
-                    className="text-stone-700 font-medium text-lg"
-                  >
-                    Cover Letter:
-                  </label>
-                  <div className="w-full sm:w-auto flex flex-col sm:flex-row gap-2 w-full">
-                    <select
-                      id="length"
-                      className="w-full sm:w-auto border border-stone-300 rounded px-2 py-1 bg-white text-stone-700"
-                      value={lengthOption}
-                      onChange={(e) => setLengthOption(e.target.value)}
-                      title={lengthDescriptions[lengthOption]}
-                    >
-                      <option value="minimal">Minimal</option>
-                      <option value="short">Short</option>
-                      <option value="standard">Standard</option>
-                      <option value="elaborate">Elaborate</option>
-                    </select>
-                    <select
-                      id="tone"
-                      className="w-full sm:w-auto border border-stone-300 rounded ml-3 px-2 py-1 bg-white text-stone-700"
-                      value={toneOption}
-                      onChange={(e) => setToneOption(e.target.value)}
-                      title={toneDescriptions[toneOption]}
-                    >
-                      <option value="professional">Professional</option>
-                      <option value="startup">Startup</option>
-                      <option value="executive">Executive</option>
-                      <option value="technical">Technical</option>
-                      <option value="creative">Creative</option>
-                      <option value="funny">Funny</option>
-                    </select>
-                  </div>
-                </div>
-
-                <div
-                  ref={resultRef}
-                  className="relative h-full min-h-[420px] overflow-y-auto p-5 bg-stone-50 border border-stone-200 rounded-lg text-left shadow-sm whitespace-pre-line"
-                >
-                  {output && (
-                    <button
-                      type="button"
-                      onClick={handleCopy}
-                      className="absolute top-2 right-2 text-sm text-stone-500 hover:text-stone-700 flex items-center gap-1 cursor-pointer"
-                    >
-                      <Copy className="w-4 h-4" /> {copied ? "Copied" : "Copy"}
-                    </button>
-                  )}
-                  <p className={`text-stone-600 ${output ? "mt-8" : ""}`}>
-                    {output ||
-                      "Your AI-generated cover letter will appear here."}
-                  </p>
-                </div>
-              </div>
-
-              {/* Resume (bottom left) */}
-              <div className="flex flex-col">
+              {/* Resume Input */}
+              <div>
                 <label
                   htmlFor="resume"
-                  className="text-stone-700 font-medium text-lg mb-2"
+                  className="text-stone-700 font-medium text-lg mb-2 block"
                 >
                   Resume (Optional):
                 </label>
@@ -338,21 +273,84 @@ export default function Home() {
                   experience.
                 </p>
               </div>
+
+              {/* Tone and Length Options */}
+              <div className="flex flex-col sm:flex-row gap-4">
+                <div className="flex-1">
+                  <label
+                    htmlFor="tone"
+                    className="block text-stone-700 font-medium mb-1"
+                  >
+                    Tone:
+                  </label>
+                  <select
+                    id="tone"
+                    className="w-full border border-stone-300 rounded px-3 py-2 bg-white text-stone-700"
+                    value={toneOption}
+                    onChange={(e) => setToneOption(e.target.value)}
+                  >
+                    <option value="professional">Professional</option>
+                    <option value="startup">Startup</option>
+                    <option value="executive">Executive</option>
+                    <option value="technical">Technical</option>
+                    <option value="creative">Creative</option>
+                    <option value="funny">Funny</option>
+                  </select>
+                </div>
+
+                <div className="flex-1">
+                  <label
+                    htmlFor="length"
+                    className="block text-stone-700 font-medium mb-1"
+                  >
+                    Length:
+                  </label>
+                  <select
+                    id="length"
+                    className="w-full border border-stone-300 rounded px-3 py-2 bg-white text-stone-700"
+                    value={lengthOption}
+                    onChange={(e) => setLengthOption(e.target.value)}
+                  >
+                    <option value="minimal">Minimal</option>
+                    <option value="short">Short</option>
+                    <option value="standard">Standard</option>
+                    <option value="elaborate">Elaborate</option>
+                  </select>
+                </div>
+              </div>
+
+              {/* Generate Button */}
+              <div className="flex justify-center">
+                <Button
+                  type="submit"
+                  onClick={handleSubmit}
+                  className="bg-stone-900 text-white hover:bg-black px-6 py-2 rounded-md cursor-pointer"
+                  disabled={loading || cooldown > 0}
+                >
+                  {loading
+                    ? "Generating..."
+                    : cooldown > 0
+                      ? `Please wait ${cooldown}s`
+                      : "Generate Cover Letter"}
+                </Button>
+              </div>
+
+              {/* Output Panel */}
+              <div className="relative bg-stone-50 border border-stone-200 p-5 rounded-lg shadow-sm whitespace-pre-line min-h-[240px]">
+                {output && (
+                  <button
+                    type="button"
+                    onClick={handleCopy}
+                    className="absolute top-2 right-2 text-sm text-stone-500 hover:text-stone-700 flex items-center gap-1 cursor-pointer"
+                  >
+                    <Copy className="w-4 h-4" /> {copied ? "Copied" : "Copy"}
+                  </button>
+                )}
+                <p className={`text-stone-600 ${output ? "mt-8" : ""}`}>
+                  {output || "Your AI-generated cover letter will appear here."}
+                </p>
+              </div>
             </form>
-            <div className="mt-6 flex justify-center md:justify-end">
-              <Button
-                type="submit"
-                onClick={handleSubmit}
-                className="text-sm bg-stone-900 text-white hover:bg-black px-6 py-2 rounded-md cursor-pointer"
-                disabled={loading || cooldown > 0}
-              >
-                {loading
-                  ? "Generating..."
-                  : cooldown > 0
-                    ? `Please wait ${cooldown}s`
-                    : "Generate Cover Letter"}
-              </Button>
-            </div>
           </div>
         </section>
 
