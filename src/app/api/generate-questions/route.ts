@@ -16,29 +16,30 @@ ${jobDescription}
 """
 
 Instructions:
-- Include ~8 behavioral/scenario-based questions.
-- Include ~8 technical questions targeting specific languages, frameworks, and tools mentioned.
+- Generate 8–10 behavioral or scenario-based questions.
+- Generate 8–10 technical questions targeting specific frameworks, languages, and tools mentioned.
 - For each question:
-  - Output exactly one line that begins with **Question:**
-  - Followed by a blank line
-  - Then exactly one line that begins with **Answer:**
-  - Then a blank line before the next question
+  - Start with a line that begins with: **Question:** followed by the question
+  - Add one empty line
+  - Then a line that begins with: **Answer:** followed by the sample answer
+  - Add one empty line **before starting the next question**
+- Do NOT combine multiple Q&As into one paragraph.
+- Do NOT number or group questions.
+- Ensure there is exactly one blank line between each Q&A pair.
 
-Example:
+Example format:
 
-**Question:** What is your experience working with React and state management?
+**Question:** What is your experience with React and state management?
 
-**Answer:** I’ve used React extensively for front-end development...
+**Answer:** I’ve used React extensively...
 
 **Question:** How do you debug a Node.js application?
 
-**Answer:** I start by replicating the issue...
+**Answer:** I usually start by...
 
-Important:
-- Do not combine questions and answers.
-- Separate each Q&A clearly using line breaks as shown.
-- Do not use headers, bullets, or numbers.
+Only output questions and answers in this format. No extra commentary.
 `;
+
 
 
 
