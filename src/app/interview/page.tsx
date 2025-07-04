@@ -26,12 +26,6 @@ export default function InterviewQuestionGenerator() {
     setLoading(false);
   };
 
-  const handleCopy = () => {
-    navigator.clipboard.writeText(output);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  };
-
   return (
     <>
       <Header />

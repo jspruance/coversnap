@@ -211,7 +211,7 @@ export default function Home() {
         <section className="w-full max-w-6xl bg-white shadow-xl border rounded-xl p-10 space-y-10 mx-auto">
           <div className="w-full max-w-6xl bg-white shadow-xl border rounded-xl p-10 space-y-10">
             <div className="text-center">
-              <h1 className="text-4xl font-extrabold tracking-tight text-stone-800 md:text-5xl">
+              <h1 className="text-3xl font-extrabold tracking-tight text-stone-800 md:text-5xl">
                 ✍️ AI <span className="text-pink-500">Cover Letter</span>{" "}
                 Generator
               </h1>
