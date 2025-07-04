@@ -287,6 +287,7 @@ export default function Home() {
                     className="w-full border border-stone-300 rounded px-3 py-2 bg-white text-stone-700"
                     value={toneOption}
                     onChange={(e) => setToneOption(e.target.value)}
+                    title={toneDescriptions[toneOption]}
                   >
                     <option value="professional">Professional</option>
                     <option value="startup">Startup</option>
@@ -309,6 +310,7 @@ export default function Home() {
                     className="w-full border border-stone-300 rounded px-3 py-2 bg-white text-stone-700"
                     value={lengthOption}
                     onChange={(e) => setLengthOption(e.target.value)}
+                    title={lengthDescriptions[lengthOption]}
                   >
                     <option value="minimal">Minimal</option>
                     <option value="short">Short</option>
