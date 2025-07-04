@@ -48,7 +48,7 @@ export default function ResumeRewriter() {
         <section className="flex flex-col items-center justify-center text-center z-10 relative">
           <div className="w-full max-w-6xl bg-white shadow-xl border rounded-xl p-10 space-y-10">
             <div className="text-center">
-              <h1 className="text-4xl font-extrabold tracking-tight text-stone-800 md:text-5xl">
+              <h1 className="text-4xl font-extrabold tracking-tight text-stone-800 md:text-4xl">
                 ✨ AI <span className="text-pink-500">Resume</span> Enhancer
               </h1>
               <p className="mt-2 text-lg text-stone-600">

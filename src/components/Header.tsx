@@ -21,7 +21,7 @@ export default function Header() {
             AI Cover Letter
           </Link>
           <Link href="/resume" className="hover:text-stone-700">
-            AI Resume Rewriter
+            AI Resume Enhancer
           </Link>
           <Link href="/interview" className="hover:text-stone-700">
             AI Interview Question Generator
@@ -36,7 +36,6 @@ export default function Header() {
             Contact
           </a>
         </nav>
-
       </div>
     </header>
   );

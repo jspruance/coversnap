@@ -37,7 +37,8 @@ export default function InterviewQuestionGenerator() {
             Generator
           </h1>
           <p className="text-stone-600 text-center mb-8">
-            Paste the job description below to generate realistic questions and sample answers.
+            Paste the job description below to generate realistic questions and
+            sample answers.
           </p>
 
           <Textarea
@@ -62,7 +63,8 @@ export default function InterviewQuestionGenerator() {
                   .split(/\*\*Question:\*\*/)
                   .filter(Boolean)
                   .map((section, i) => {
-                    const [question, ...rest] = section.split(/\*\*Answer:\*\*/);
+                    const [question, ...rest] =
+                      section.split(/\*\*Answer:\*\*/);
                     const answer = rest.join("**Answer:**").trim();
 
                     return (

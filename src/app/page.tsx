@@ -30,8 +30,6 @@ export default function Home() {
   const [email, setEmail] = useState("");
   const resultRef = useRef<HTMLDivElement>(null);
 
-
-
   // social media share info
   const shareUrl = "https://coversnapapp.com";
   const title = "Check out CoverSnap — AI cover letter generator";
@@ -221,7 +219,7 @@ export default function Home() {
         <section className="flex flex-col items-center justify-center text-center py-12 px-4 z-10 relative">
           <div className="w-full max-w-6xl bg-white shadow-xl border rounded-xl p-10 space-y-10">
             <div className="text-center">
-              <h1 className="text-4xl font-extrabold tracking-tight text-stone-800 md:text-5xl">
+              <h1 className="text-4xl font-extrabold tracking-tight text-stone-800 md:text-4xl">
                 ✍️ AI <span className="text-pink-500">Cover Letter</span>{" "}
                 Generator
               </h1>
