@@ -7,7 +7,7 @@ export async function POST(req: Request) {
   const { jobDescription } = await req.json();
 
   const prompt = `
-You are an expert technical interviewer. Based on the following job description, generate a realistic list of 15–20 interview questions with sample answers.
+You are an expert technical interviewer. Based on the following job description, generate 15–20 realistic interview questions and sample answers.
 
 Use this job description:
 
@@ -16,28 +16,29 @@ ${jobDescription}
 """
 
 Instructions:
-- Include 8–10 behavioral or scenario-based questions.
-- Include 8–10 technical questions that assess knowledge of the specific languages, frameworks, and tools mentioned in the job description.
-- Avoid generic “Tell me about a time…” phrasing for technical questions. Ask questions that test skill or understanding (e.g. "What does useMemo do in React?").
-- Include technologies like React, TypeScript, Python, AWS, etc., if mentioned in the job description.
-- For each question, provide a realistic, well-prepared sample answer.
-- Format exactly like this:
+- Include ~8 behavioral/scenario-based questions.
+- Include ~8 technical questions targeting specific languages, frameworks, and tools mentioned.
+- For each question:
+  - Output exactly one line that begins with **Question:**
+  - Followed by a blank line
+  - Then exactly one line that begins with **Answer:**
+  - Then a blank line before the next question
+
+Example:
 
 **Question:** What is your experience working with React and state management?
+
 **Answer:** I’ve used React extensively for front-end development...
 
-**Question:** How do you handle conflict on a remote team?
-**Answer:** I believe in proactive communication...
+**Question:** How do you debug a Node.js application?
+
+**Answer:** I start by replicating the issue...
 
 Important:
-- Do not use headings or sections.
-- Do not number the questions.
-- Just alternate between **Question:** and **Answer:** blocks.
-- Keep each answer concise but informative, as a strong candidate might respond.
-
-Output only the questions and answers using this structure.
+- Do not combine questions and answers.
+- Separate each Q&A clearly using line breaks as shown.
+- Do not use headers, bullets, or numbers.
 `;
-
 
   const completion = await openai.chat.completions.create({
     model: "gpt-4o",
