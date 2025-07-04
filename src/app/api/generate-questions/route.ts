@@ -43,6 +43,7 @@ Only output questions and answers in this format. No extra commentary.
 
 
 
+
   const completion = await openai.chat.completions.create({
     model: "gpt-4o",
     messages: [{ role: "user", content: prompt }],
