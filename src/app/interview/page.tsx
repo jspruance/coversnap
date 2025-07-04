@@ -4,14 +4,11 @@ import { useState } from "react";
 import Header from "@/components/Header";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
-import { Copy } from "lucide-react";
-import ReactMarkdown from "react-markdown";
 
 export default function InterviewQuestionGenerator() {
   const [input, setInput] = useState("");
   const [output, setOutput] = useState("");
   const [loading, setLoading] = useState(false);
-  const [copied, setCopied] = useState(false);
 
   const handleGenerate = async () => {
     if (!input.trim()) return;
