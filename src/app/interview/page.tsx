@@ -32,7 +32,7 @@ export default function InterviewQuestionGenerator() {
       <Header />
       <main className="min-h-screen bg-gradient-to-b from-white via-stone-50 to-stone-100 px-4 py-20">
         <section className="w-full max-w-6xl bg-white shadow-xl border rounded-xl p-10 space-y-10 mx-auto">
-          <h1 className="text-4xl font-bold text-stone-800 mb-4 text-center">
+          <h1 className="text-4xl font-extrabold text-stone-800 mb-4 text-center">
             🎤 AI <span className="text-pink-500">Interview Question</span>{" "}
             Generator
           </h1>
