@@ -212,10 +212,8 @@ export default function Home() {
         {/* Favicon */}
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
+      <Header />
       <main className="min-h-screen bg-gradient-to-b from-white via-stone-50 to-stone-100 px-0 relative overflow-hidden">
-        <Header />
-
         <section className="flex flex-col items-center justify-center text-center py-12 px-4 z-10 relative">
           <div className="w-full max-w-6xl bg-white shadow-xl border rounded-xl p-10 space-y-10">
             <div className="text-center">
