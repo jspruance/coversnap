@@ -16,24 +16,32 @@ export default function Header() {
           />
         </Link>
 
-        <nav className="flex gap-6 text-sm text-stone-500">
+        <nav className="flex items-center gap-6 text-sm text-stone-500">
           <Link href="/" className="hover:text-stone-700">
-            AI Cover Letter
+            Cover Letter
           </Link>
           <Link href="/resume" className="hover:text-stone-700">
-            AI Resume Enhancer
+            Resume Enhancer
           </Link>
           <Link href="/interview" className="hover:text-stone-700">
-            AI Interview Question Generator
+            Interview Question Generator
           </Link>
           <Link href="/blog" className="hover:text-stone-700">
             Blog
           </Link>
+          <a href="#contact" className="hover:text-stone-700">
+            Contact
+          </a>
           <a href="#pricing" className="hover:text-stone-700">
             Pricing
           </a>
-          <a href="#contact" className="hover:text-stone-700">
-            Contact
+          <a
+            href="https://buy.stripe.com/00waEX5QIdKpaiB92webu04"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="bg-pink-600 text-white px-4 py-2 rounded-md hover:bg-pink-700 transition"
+          >
+            Unlock for $5
           </a>
         </nav>
       </div>

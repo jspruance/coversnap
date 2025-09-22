@@ -5,6 +5,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Copy } from "lucide-react";
 import Head from "next/head";
+import Link from "next/link";
 import {
   LinkedinShareButton,
   TwitterShareButton,
@@ -523,6 +524,14 @@ export default function Home() {
               </ul>
             </div>
           </div>
+          <Link
+            href="https://buy.stripe.com/00waEX5QIdKpaiB92webu04"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block bg-pink-600 text-white px-5 py-2 mt-4 rounded-md text-lg font-semibold hover:bg-pink-700 transition"
+          >
+            Buy Now for $5
+          </Link>
         </section>
         <section id="contact" className="text-center mt-16 px-4">
           <h3 className="text-lg font-semibold text-stone-700 mb-4">
