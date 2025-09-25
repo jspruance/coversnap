@@ -2,6 +2,7 @@
 import { NextResponse } from "next/server";
 import OpenAI from "openai";
 import { ChatCompletionMessageParam } from "openai/resources/chat/completions";
+import { APIError } from "openai/error";
 
 //  Disable Next.js caching for this API route
 // `dynamic = "force-dynamic"` → always render fresh on each request (no pre-rendering)
@@ -19,7 +20,7 @@ export async function POST(req: Request) {
     );
   }
 
-  let body: any;
+  let body;
   try {
     body = await req.json();
   } catch {
@@ -135,9 +136,16 @@ export async function POST(req: Request) {
       { text },
       { headers: { "Cache-Control": "no-store" } }
     );
-  } catch (err: any) {
-    const status = err?.status ?? 500;
-    console.error("LLM error:", status);
-    return NextResponse.json({ error: "LLM request failed" }, { status });
+  } catch (err) {
+    if (err instanceof APIError) {
+      console.error("LLM error:", err.status, err.message);
+      return NextResponse.json({ error: err.message }, { status: err.status });
+    }
+
+    console.error("Unexpected error:", err);
+    return NextResponse.json(
+      { error: "Unknown server error" },
+      { status: 500 }
+    );
   }
 }
