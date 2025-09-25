@@ -114,7 +114,7 @@ export default function Home() {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        input: jobDescription.trim(),
+        jobDescription: jobDescription.trim(),
         resume: resume.trim(),
         length: lengthOption,
         tone: toneOption,
