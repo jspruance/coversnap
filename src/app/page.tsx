@@ -122,7 +122,7 @@ export default function Home() {
     });
 
     const data = await res.json();
-    setOutput(data.result || "Something went wrong.");
+    setOutput(data.text || "Something went wrong.");
     setLoading(false);
     setCooldown(15);
 

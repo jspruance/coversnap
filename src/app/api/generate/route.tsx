@@ -1,35 +1,45 @@
+// app/api/generate/route.ts
 import { NextResponse } from "next/server";
 import OpenAI from "openai";
 import { ChatCompletionMessageParam } from "openai/resources/chat/completions";
 
+//  Disable Next.js caching for this API route
+// `dynamic = "force-dynamic"` → always render fresh on each request (no pre-rendering)
+// `revalidate = 0` → don't reuse cached results (no ISR)
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
-// Simple in-memory rate limiter
-const ipRequests: Record<string, { count: number; lastRequest: number }> = {};
-const RATE_LIMIT = 10; // max 10 requests per hour
-
 export async function POST(req: Request) {
-  const { input, length, tone, resume } = await req.json();
-
-  const ip = req.headers.get("x-forwarded-for") || "unknown";
-  const now = Date.now();
-
-  if (!ipRequests[ip]) {
-    ipRequests[ip] = { count: 1, lastRequest: now };
-  } else {
-    const elapsed = now - ipRequests[ip].lastRequest;
-    if (elapsed > 60 * 60 * 1000) {
-      ipRequests[ip] = { count: 1, lastRequest: now };
-    } else {
-      ipRequests[ip].count++;
-      if (ipRequests[ip].count > RATE_LIMIT) {
-        return NextResponse.json(
-          { result: "Rate limit exceeded. Try again later." },
-          { status: 429 }
-        );
-      }
-    }
+  if (!process.env.OPENAI_API_KEY) {
+    return NextResponse.json(
+      { error: "Server misconfig: missing OPENAI_API_KEY" },
+      { status: 500 }
+    );
   }
+
+  let body: any;
+  try {
+    body = await req.json();
+  } catch {
+    return NextResponse.json({ error: "Invalid JSON" }, { status: 400 });
+  }
+
+  const jobDescription = (body?.jobDescription ?? "").toString().slice(0, 4000);
+  const length = (body?.length ?? "standard").toString().slice(0, 20);
+  const tone = (body?.tone ?? "professional").toString().slice(0, 30);
+  const resume = (body?.resume ?? "").toString().slice(0, 6000);
+
+  if (!jobDescription) {
+    return NextResponse.json(
+      { error: "Field 'job description') is required" },
+      { status: 400 }
+    );
+  }
+
+  // NOTE: Skip in-memory rate limiting in Part 1 (not reliable on serverless).
+  // Mention you'll add a proper limiter (e.g., Upstash/Redis) in a later video.
 
   // Length-based instructions
   let lengthInstruction = "";
@@ -53,7 +63,7 @@ export async function POST(req: Request) {
       break;
   }
 
-  // Tone-based instructions (if any)
+  // Tone-based instructions
   let toneInstruction = "";
   switch (tone) {
     case "startup":
@@ -87,41 +97,47 @@ export async function POST(req: Request) {
   const messages: ChatCompletionMessageParam[] = [
     {
       role: "system",
-      content: `You are an expert cover letter writer. ${styleInstruction}`,
+      content:
+        `You are an expert cover-letter writer. ` +
+        `Write a concise, tailored letter with greeting, 1–2 short paragraphs, and a closing. ` +
+        `${styleInstruction}`,
     },
     {
       role: "user",
-      content: `Here's the job description:\n\n${input}`,
+      content: `Here's the job description:\n\n${jobDescription}`,
     },
   ];
 
-  // If resume was provided, add it as an additional message
   if (resume && resume.length > 20) {
     messages.push({
       role: "user",
-      content: `
-Here is my resume. Use this to tailor the cover letter to highlight relevant experience, skills, and achievements that match the job description. Emphasize strong fits between my background and the role. Do not copy the resume verbatim — instead, rephrase it naturally within the cover letter.
-
-Resume:
-${resume}`.trim(),
+      content:
+        `Use my resume to tailor the letter. Emphasize the best matches to the role. ` +
+        `Do not copy the resume verbatim—rephrase naturally.\n\nResume:\n${resume}`,
     });
   }
 
-  if (resume?.length) {
-    console.log(`Resume included: ${resume.length} characters`);
+  try {
+    const completion = await openai.chat.completions.create({
+      model: "gpt-4o", // viewers can swap to gpt-5 if they have access
+      messages,
+      temperature: 0.7,
+      // max_tokens: 600, // optional safety bound
+    });
+
+    const text = completion.choices?.[0]?.message?.content ?? "";
+    const usage = completion.usage;
+    console.log(
+      `Tokens used: prompt ${usage?.prompt_tokens}, completion ${usage?.completion_tokens}, total ${usage?.total_tokens}`
+    );
+
+    return NextResponse.json(
+      { text },
+      { headers: { "Cache-Control": "no-store" } }
+    );
+  } catch (err: any) {
+    const status = err?.status ?? 500;
+    console.error("LLM error:", status);
+    return NextResponse.json({ error: "LLM request failed" }, { status });
   }
-
-  // main LLM request
-  const completion = await openai.chat.completions.create({
-    model: "gpt-4o",
-    messages,
-    temperature: 0.7,
-  });
-
-  const usage = completion.usage;
-  console.log(
-    `Tokens used: prompt ${usage?.prompt_tokens}, completion ${usage?.completion_tokens}, total ${usage?.total_tokens}`
-  );
-
-  return NextResponse.json({ result: completion.choices[0].message.content });
 }
