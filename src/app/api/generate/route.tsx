@@ -98,10 +98,7 @@ export async function POST(req: Request) {
   const messages: ChatCompletionMessageParam[] = [
     {
       role: "system",
-      content:
-        `You are an expert cover-letter writer. ` +
-        `Write a concise, tailored letter with greeting, 1–2 short paragraphs, and a closing. ` +
-        `${styleInstruction}`,
+      content: `You are an expert cover letter writer. ${styleInstruction}`,
     },
     {
       role: "user",
@@ -109,13 +106,20 @@ export async function POST(req: Request) {
     },
   ];
 
+  // If resume was provided, add it as an additional message
   if (resume && resume.length > 20) {
     messages.push({
       role: "user",
-      content:
-        `Use my resume to tailor the letter. Emphasize the best matches to the role. ` +
-        `Do not copy the resume verbatim—rephrase naturally.\n\nResume:\n${resume}`,
+      content: `
+Here is my resume. Use this to tailor the cover letter to highlight relevant experience, skills, and achievements that match the job description. Emphasize strong fits between my background and the role. Do not copy the resume verbatim — instead, rephrase it naturally within the cover letter.
+
+Resume:
+${resume}`.trim(),
     });
+  }
+
+  if (resume?.length) {
+    console.log(`Resume included: ${resume.length} characters`);
   }
 
   try {
