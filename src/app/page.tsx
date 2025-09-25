@@ -19,7 +19,7 @@ import {
 import Header from "@/components/Header";
 
 export default function Home() {
-  const [inputValue, setInputValue] = useState("");
+  const [jobDescription, setJobDescription] = useState("");
   const [resume, setResume] = useState("");
   const [output, setOutput] = useState("");
   const [loading, setLoading] = useState(false);
@@ -38,14 +38,14 @@ export default function Home() {
   useEffect(() => {
     const savedInput = localStorage.getItem("coversnap_input");
     const savedOutput = localStorage.getItem("coversnap_output");
-    if (savedInput) setInputValue(savedInput);
+    if (savedInput) setJobDescription(savedInput);
     if (savedOutput) setOutput(savedOutput);
   }, []);
 
   useEffect(() => {
-    localStorage.setItem("coversnap_input", inputValue);
+    localStorage.setItem("coversnap_input", jobDescription);
     localStorage.setItem("coversnap_output", output);
-  }, [inputValue, output]);
+  }, [jobDescription, output]);
 
   useEffect(() => {
     const today = new Date().toDateString();
@@ -87,7 +87,7 @@ export default function Home() {
   };
 
   const handleReset = () => {
-    setInputValue("");
+    setJobDescription("");
     setResume("");
     setOutput("");
     setCooldown(0);
@@ -98,7 +98,7 @@ export default function Home() {
     e: React.FormEvent<HTMLFormElement> | React.MouseEvent<HTMLButtonElement>
   ) => {
     e.preventDefault();
-    if (cooldown > 0 || loading || inputValue.trim().length < 30) return;
+    if (cooldown > 0 || loading || jobDescription.trim().length < 30) return;
 
     const unlocked = localStorage.getItem("coversnap_unlocked") === "true";
     const uses = parseInt(localStorage.getItem("coversnap_uses") || "0");
@@ -114,7 +114,7 @@ export default function Home() {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        input: inputValue.trim(),
+        input: jobDescription.trim(),
         resume: resume.trim(),
         length: lengthOption,
         tone: toneOption,
@@ -239,8 +239,8 @@ export default function Home() {
                 </label>
                 <Textarea
                   id="jobDescription"
-                  value={inputValue}
-                  onChange={(e) => setInputValue(e.target.value)}
+                  value={jobDescription}
+                  onChange={(e) => setJobDescription(e.target.value)}
                   placeholder="Paste the job description here..."
                   className="w-full h-[180px] text-base p-4 rounded-lg border border-stone-300 resize-none"
                 />
