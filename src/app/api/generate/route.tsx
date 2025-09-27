@@ -1,16 +1,18 @@
 // app/api/generate/route.ts
 import { NextResponse } from "next/server";
-import OpenAI from "openai";
-import { ChatCompletionMessageParam } from "openai/resources/chat/completions";
-import { APIError } from "openai/error";
+import OpenAI, { APIError } from "openai";
 
-//  Disable Next.js caching for this API route
-// `dynamic = "force-dynamic"` → always render fresh on each request (no pre-rendering)
-// `revalidate = 0` → don't reuse cached results (no ISR)
+// Disable Next.js caching for this API route
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
+// If you want to force Node runtime (recommended for server SDKs):
+export const runtime = "nodejs";
 
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+
+// Simple in-memory rate limiter
+const ipRequests: Record<string, { count: number; lastRequest: number }> = {};
+const RATE_LIMIT = 10; // max 10 requests per hour
 
 export async function POST(req: Request) {
   if (!process.env.OPENAI_API_KEY) {
@@ -20,7 +22,7 @@ export async function POST(req: Request) {
     );
   }
 
-  let body;
+  let body: any;
   try {
     body = await req.json();
   } catch {
@@ -34,13 +36,32 @@ export async function POST(req: Request) {
 
   if (!jobDescription) {
     return NextResponse.json(
-      { error: "Field 'job description') is required" },
+      { error: "Field 'jobDescription' is required" },
       { status: 400 }
     );
   }
 
-  // NOTE: Skip in-memory rate limiting in Part 1 (not reliable on serverless).
-  // Mention you'll add a proper limiter (e.g., Upstash/Redis) in a later video.
+  // ---- Rate limiting block ----
+  const ip = (req.headers.get("x-forwarded-for") || "unknown").split(",")[0].trim();
+  const now = Date.now();
+
+  if (!ipRequests[ip]) {
+    ipRequests[ip] = { count: 1, lastRequest: now };
+  } else {
+    const elapsed = now - ipRequests[ip].lastRequest;
+    if (elapsed > 60 * 60 * 1000) {
+      ipRequests[ip] = { count: 1, lastRequest: now };
+    } else {
+      ipRequests[ip].count++;
+      if (ipRequests[ip].count > RATE_LIMIT) {
+        return NextResponse.json(
+          { error: "Rate limit exceeded. Try again later." },
+          { status: 429 }
+        );
+      }
+    }
+  }
+  // ------------------------------
 
   // Length-based instructions
   let lengthInstruction = "";
@@ -89,52 +110,41 @@ export async function POST(req: Request) {
       break;
     case "professional":
     default:
-      // "professional" or no tone just means neutral — no override
       break;
   }
 
   const styleInstruction = `${lengthInstruction} ${toneInstruction}`.trim();
 
-  const messages: ChatCompletionMessageParam[] = [
-    {
-      role: "system",
-      content: `You are an expert cover letter writer. ${styleInstruction}`,
-    },
-    {
-      role: "user",
-      content: `Here's the job description:\n\n${jobDescription}`,
-    },
-  ];
-
-  // If resume was provided, add it as an additional message
-  if (resume && resume.length > 20) {
-    messages.push({
-      role: "user",
-      content: `
-Here is my resume. Use this to tailor the cover letter to highlight relevant experience, skills, and achievements that match the job description. Emphasize strong fits between my background and the role. Do not copy the resume verbatim — instead, rephrase it naturally within the cover letter.
-
-Resume:
-${resume}`.trim(),
-    });
-  }
-
-  if (resume?.length) {
-    console.log(`Resume included: ${resume.length} characters`);
-  }
+  // Build a single string input (simplest, TS-clean)
+  const inputText = [
+    "You are an expert cover letter writer.",
+    styleInstruction && `Style:\n${styleInstruction}`,
+    `Job Description:\n${jobDescription}`,
+    resume && resume.length > 20
+      ? `Resume (use to tailor, do not copy verbatim):\n${resume}`
+      : "",
+  ]
+    .filter(Boolean)
+    .join("\n\n");
 
   try {
-    const completion = await openai.chat.completions.create({
-      model: "gpt-4o", // viewers can swap to gpt-5 if they have access
-      messages,
+    const response = await openai.responses.create({
+      model: "gpt-4o",
+      // Short instruction to constrain the output shape
+      instructions:
+        "Follow the style and constraints. Return only the final cover letter text.",
+      input: inputText,
       temperature: 0.7,
-      // max_tokens: 600, // optional safety bound
     });
 
-    const text = completion.choices?.[0]?.message?.content ?? "";
-    const usage = completion.usage;
-    console.log(
-      `Tokens used: prompt ${usage?.prompt_tokens}, completion ${usage?.completion_tokens}, total ${usage?.total_tokens}`
-    );
+    const text = response.output_text ?? "";
+    const usage = response.usage;
+
+    if (usage) {
+      console.log(
+        `Tokens used: input ${usage.input_tokens}, output ${usage.output_tokens}, total ${usage.total_tokens}`
+      );
+    }
 
     return NextResponse.json(
       { text },
@@ -145,11 +155,7 @@ ${resume}`.trim(),
       console.error("LLM error:", err.status, err.message);
       return NextResponse.json({ error: err.message }, { status: err.status });
     }
-
     console.error("Unexpected error:", err);
-    return NextResponse.json(
-      { error: "Unknown server error" },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: "Unknown server error" }, { status: 500 });
   }
 }
