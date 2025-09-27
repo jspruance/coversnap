@@ -22,7 +22,7 @@ export async function POST(req: Request) {
     );
   }
 
-  let body: any;
+  let body;
   try {
     body = await req.json();
   } catch {
