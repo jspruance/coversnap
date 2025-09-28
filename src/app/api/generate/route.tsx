@@ -14,6 +14,14 @@ const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 const ipRequests: Record<string, { count: number; lastRequest: number }> = {};
 const RATE_LIMIT = 10; // max 10 requests per hour
 
+// Define a type for your incoming request body
+interface RequestBody {
+  jobDescription: string;
+  length?: "short" | "minimal" | "elaborate" | "standard";
+  tone?: "startup" | "executive" | "creative" | "technical" | "funny" | "professional";
+  resume?: string;
+}
+
 export async function POST(req: Request) {
   if (!process.env.OPENAI_API_KEY) {
     return NextResponse.json(
@@ -22,17 +30,17 @@ export async function POST(req: Request) {
     );
   }
 
-  let body;
+  let body: RequestBody;
   try {
     body = await req.json();
   } catch {
     return NextResponse.json({ error: "Invalid JSON" }, { status: 400 });
   }
 
-  const jobDescription = (body?.jobDescription ?? "").toString().slice(0, 4000);
-  const length = (body?.length ?? "standard").toString().slice(0, 20);
-  const tone = (body?.tone ?? "professional").toString().slice(0, 30);
-  const resume = (body?.resume ?? "").toString().slice(0, 6000);
+  const jobDescription = body.jobDescription?.toString().slice(0, 4000) ?? "";
+  const length = body.length ?? "standard";
+  const tone = body.tone ?? "professional";
+  const resume = body.resume?.toString().slice(0, 6000) ?? "";
 
   if (!jobDescription) {
     return NextResponse.json(
@@ -63,25 +71,24 @@ export async function POST(req: Request) {
   }
   // ------------------------------
 
+  /*
+    INSTRUCTIONS START
+  */
   // Length-based instructions
   let lengthInstruction = "";
   switch (length) {
     case "short":
-      lengthInstruction =
-        "Keep the cover letter concise and punchy. Just 3–4 sentences. Skip fluff and be direct.";
+      lengthInstruction = "Keep the cover letter concise and punchy. Just 3–4 sentences. Skip fluff and be direct.";
       break;
     case "minimal":
-      lengthInstruction =
-        "Write a minimalist, efficient letter with 2–3 sentences and no filler.";
+      lengthInstruction = "Write a minimalist, efficient letter with 2–3 sentences and no filler.";
       break;
     case "elaborate":
-      lengthInstruction =
-        "Write a detailed, persuasive letter emphasizing accomplishments and relevant experience.";
+      lengthInstruction = "Write a detailed, persuasive letter emphasizing accomplishments and relevant experience.";
       break;
     case "standard":
     default:
-      lengthInstruction =
-        "Write a professional and well-crafted cover letter tailored to the job description.";
+      lengthInstruction = "Write a professional and well-crafted cover letter tailored to the job description.";
       break;
   }
 
@@ -89,24 +96,19 @@ export async function POST(req: Request) {
   let toneInstruction = "";
   switch (tone) {
     case "startup":
-      toneInstruction =
-        "Write a startup-oriented cover letter, at most 2–3 tight paragraphs. Use tech-savvy, Silicon Valley startup lingo. No address or placeholders at the top.";
+      toneInstruction = "Write a startup-oriented cover letter, at most 2–3 tight paragraphs. Use tech-savvy, Silicon Valley startup lingo. No address or placeholders at the top.";
       break;
     case "executive":
-      toneInstruction =
-        "Craft a polished, executive-leadership-oriented letter tailored for senior-level positions.";
+      toneInstruction = "Craft a polished, executive-leadership-oriented letter tailored for senior-level positions.";
       break;
     case "creative":
-      toneInstruction =
-        "Write a creative, personality-driven letter appropriate for design or media jobs.";
+      toneInstruction = "Write a creative, personality-driven letter appropriate for design or media jobs.";
       break;
     case "technical":
-      toneInstruction =
-        "Write a technically focused letter highlighting hard skills, projects, and tools.";
+      toneInstruction = "Write a technically focused letter highlighting hard skills, projects, and tools.";
       break;
     case "funny":
-      toneInstruction =
-        "Write a funny cover letter. 1–2 paragraphs at most. No address or placeholders at the top.";
+      toneInstruction = "Write a funny cover letter. 1–2 paragraphs at most. No address or placeholders at the top.";
       break;
     case "professional":
     default:
@@ -115,25 +117,45 @@ export async function POST(req: Request) {
 
   const styleInstruction = `${lengthInstruction} ${toneInstruction}`.trim();
 
-  // Build a single string input (simplest, TS-clean)
-  const inputText = [
-    "You are an expert cover letter writer.",
-    styleInstruction && `Style:\n${styleInstruction}`,
-    `Job Description:\n${jobDescription}`,
-    resume && resume.length > 20
-      ? `Resume (use to tailor, do not copy verbatim):\n${resume}`
-      : "",
-  ]
-    .filter(Boolean)
-    .join("\n\n");
+  // Derive arg type from SDK
+  type CreateArgs = Parameters<typeof openai.responses.create>[0];
+
+  // Build block-structured input
+  const input: Exclude<CreateArgs["input"], string> = [
+    {
+      role: "developer",
+      content: [
+        {
+          type: "input_text",
+          text: `You are an expert cover letter writer. ${styleInstruction}\nReturn only the final cover letter text.`,
+        },
+      ],
+    },
+    {
+      role: "user",
+      content: [{ type: "input_text", text: `Job Description:\n\n${jobDescription}` }],
+    },
+  ];
+
+  if (resume && resume.length > 20) {
+    input.push({
+      role: "user",
+      content: [{ type: "input_text", text: `Resume (use to tailor, do not copy verbatim):\n${resume}` }],
+    });
+  }
+
+  if (resume?.length) {
+    console.log(`Resume included: ${resume.length} characters`);
+  }
+  /*
+    INSTRUCTIONS END
+  */
 
   try {
     const response = await openai.responses.create({
-      model: "gpt-4o",
-      // Short instruction to constrain the output shape
-      instructions:
-        "Follow the style and constraints. Return only the final cover letter text.",
-      input: inputText,
+      model: "gpt-4o", // or "gpt-5" if available
+      instructions: "Follow the style. Return only the final cover letter text.",
+      input,
       temperature: 0.7,
     });
 
@@ -146,10 +168,7 @@ export async function POST(req: Request) {
       );
     }
 
-    return NextResponse.json(
-      { text },
-      { headers: { "Cache-Control": "no-store" } }
-    );
+    return NextResponse.json({ text }, { headers: { "Cache-Control": "no-store" } });
   } catch (err) {
     if (err instanceof APIError) {
       console.error("LLM error:", err.status, err.message);
